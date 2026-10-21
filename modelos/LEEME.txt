@@ -1,0 +1,18 @@
+Personajes 3D de la web
+
+peluquero.glb y cliente.glb están hechos por código a partir de las láminas de referencia
+(fuente/personajes.js) y ya vienen comprimidos (meshopt + texturas webp), listos para la web.
+
+Cada modelo tiene articulaciones con nombre que la web anima: cabeza, brazo_izq, brazo_der,
+antebrazo_izq, antebrazo_der, pierna_izq y pierna_der. El cliente tiene además las piezas
+cabeza_pelo y cabeza_barba, que la web usa para colocar la espuma, la navaja y el tinte.
+
+Para cambiarlos:
+1. Edita fuente/personajes.js (colores, formas, peinado...).
+2. Abre fuente/generar.html con Live Server, revisa el resultado y pulsa los botones de descarga.
+3. Comprime los archivos descargados y guárdalos aquí, en la terminal de VS Code:
+   npx @gltf-transform/cli optimize peluquero.glb modelos/peluquero.glb --compress meshopt --texture-compress webp --texture-size 512 --simplify false --join false --flatten false --instance false --palette false
+   npx @gltf-transform/cli optimize cliente.glb modelos/cliente.glb --compress meshopt --texture-compress webp --texture-size 512 --simplify false --join false --flatten false --instance false --palette false
+
+Si en algún momento usas otros modelos (de Meshy, por ejemplo), la web también funciona:
+sin articulaciones los personajes se mueven enteros y la cabeza del cliente se mide por sus vértices.

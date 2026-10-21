@@ -1,0 +1,2592 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AMV Salón barbería — Barbería en Mérida</title>
+<meta name="description" content="AMV Salón barbería en C. San Salvador, 35, Mérida. Corte de pelo, arreglo de barba, lavado, tinte y servicio completo. Reserva tu cita online.">
+<meta name="theme-color" content="#0b1a26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1a26'/%3E%3Cpath d='M10 44 20 20 30 44M30 44 38 20 44 34 50 20 54 44' fill='none' stroke='%23e8edf0' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  "name": "AMV Salón barbería",
+  "telephone": "+34 628 51 22 94",
+  "address": { "@type": "PostalAddress", "streetAddress": "C. San Salvador, 35", "postalCode": "06800", "addressLocality": "Mérida", "addressRegion": "Badajoz", "addressCountry": "ES" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 38.9175549, "longitude": -6.3489457 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "14:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "16:30", "closes": "20:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:30", "closes": "14:00" }
+  ],
+  "sameAs": ["https://www.instagram.com/albertomoyabarberia/"]
+}
+</script>
+<style>
+:root {
+  --retake-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --retake-slow-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --ink: #0b1a26;
+  --ink-2: #0f2232;
+  --ink-3: #14293b;
+  --line: rgb(255 255 255 / 0.11);
+  --muted: rgb(255 255 255 / 0.68);
+  --sky: #9fc2d6;
+  --gold: #e3bb6a;
+  --red: #d4454c;
+  --ok: #7fd6a8;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Manrope', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+button, input, select, textarea { font-family: 'Manrope', system-ui, sans-serif; }
+::selection { background: rgba(255, 255, 255, 0.2); }
+:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+a { color: inherit; }
+img { max-width: 100%; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ═════════ HERO ═════════ */
+.stage {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+}
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+}
+.scene-link {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  cursor: pointer;
+  border-radius: 0;
+}
+.scene-link[hidden] { display: none; }
+.scene-link:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
+
+.hero { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.title {
+  position: absolute;
+  top: 35.9%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(901px, calc(100vw - 48px));
+  margin: 0;
+  text-align: center;
+  font-size: clamp(62px, 6.8vw, 100px);
+  font-weight: 500;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 0.14), 0 0 30px rgb(4 16 26 / 0.42);
+}
+.title span {
+  display: inline-block;
+  transition: opacity 900ms var(--retake-ease), filter 900ms var(--retake-ease), transform 900ms var(--retake-ease);
+}
+.title span:nth-child(2) { transition-delay: 90ms; }
+.title span:nth-child(3) { transition-delay: 180ms; }
+.stage.title-hidden .title span { opacity: 0; filter: blur(12px); transform: translateY(-10px); }
+
+.copy {
+  position: absolute;
+  top: calc(46.78% + 94px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(734px, calc(100vw - 48px));
+  margin: 0;
+  text-align: center;
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.16), 0 0 18px rgb(6 20 32 / 0.35);
+  transition: opacity 260ms var(--retake-ease), filter 260ms var(--retake-ease);
+}
+.copy strong { font-weight: 600; }
+.copy .sub { display: block; margin-top: 4px; }
+.copy .more {
+  pointer-events: auto;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 2px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.copy.swap { opacity: 0; filter: blur(6px); }
+
+/* ───── Controller ───── */
+.controller {
+  --col: calc(100% / 6);
+  --glass-x: 24%;
+  --glass-y: 8%;
+  position: absolute;
+  top: 46.78%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(980px, calc(100vw - 48px));
+  height: 72px;
+  z-index: 20;
+}
+.glass { position: absolute; }
+.glass::before, .glass::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.glass::before {
+  inset: 0;
+  background:
+    radial-gradient(120% 150% at var(--glass-x, 24%) var(--glass-y, 8%), rgb(255 255 255 / 0.25), rgb(255 255 255 / 0) 53%),
+    linear-gradient(115deg, rgb(255 255 255 / 0.10), rgb(255 255 255 / 0) 42%);
+}
+.glass::after {
+  inset: -1px;
+  padding: 1px;
+  background: conic-gradient(from 225deg, #7fe3ff, rgb(255 255 255 / 0.35), #ffffff, #ffd7e6, rgb(255 255 255 / 0.35), #7fe3ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+.track {
+  top: 4px;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  border-radius: 999px;
+  background: rgb(24 55 82 / 0.31);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  -webkit-backdrop-filter: blur(9px) saturate(126%) contrast(108%) brightness(103%);
+          backdrop-filter: blur(9px) saturate(126%) contrast(108%) brightness(103%);
+  box-shadow:
+    0 14px 38px rgb(4 24 43 / 0.16),
+    0 2px 7px rgb(4 24 43 / 0.1),
+    inset 1px 1px 0 rgb(255 255 255 / 0.48),
+    inset -1px -1px 0 rgb(21 49 73 / 0.14),
+    inset 0 0 0 0.5px rgb(255 255 255 / 0.16);
+  opacity: 1;
+  transition:
+    left 980ms var(--retake-slow-ease), width 980ms var(--retake-slow-ease),
+    top 980ms var(--retake-slow-ease), height 980ms var(--retake-slow-ease),
+    border-radius 980ms var(--retake-slow-ease), opacity 400ms linear;
+}
+.track::after { opacity: 0.27; }
+.controller.collapsed .track { left: calc(50% - 96px); width: 192px; }
+.controller.rear-faded .track {
+  opacity: 0;
+  transition:
+    left 980ms var(--retake-slow-ease), width 980ms var(--retake-slow-ease),
+    top 980ms var(--retake-slow-ease), height 980ms var(--retake-slow-ease),
+    border-radius 980ms var(--retake-slow-ease), opacity 400ms linear 650ms;
+}
+.capsule {
+  top: -1px;
+  height: 72px;
+  left: var(--cap-left, -5px);
+  width: var(--cap-width, calc(var(--col) + 5px));
+  border-radius: 999px;
+  background: rgb(246 251 255 / 0.24);
+  border: 1px solid rgb(255 255 255 / 0.28);
+  -webkit-backdrop-filter: blur(13px) saturate(128%) contrast(107%) brightness(105%);
+          backdrop-filter: blur(13px) saturate(128%) contrast(107%) brightness(105%);
+  box-shadow:
+    0 11px 28px rgb(4 24 43 / 0.17),
+    0 2px 6px rgb(4 24 43 / 0.1),
+    inset 1px 1px 0 rgb(255 255 255 / 0.62),
+    inset -1px -1px 0 rgb(20 49 73 / 0.18),
+    inset 0 0 12px rgb(255 255 255 / 0.055);
+  transition: left 620ms var(--retake-ease), width 620ms var(--retake-ease), background-color 980ms var(--retake-slow-ease), opacity 420ms var(--retake-ease);
+}
+.capsule::after { opacity: 0.30; }
+.controller.collapsed .capsule {
+  left: calc(50% - 100px);
+  width: 200px;
+  background-color: rgb(246 251 255 / 0.14);
+  transition: left 980ms var(--retake-slow-ease), width 980ms var(--retake-slow-ease), background-color 980ms var(--retake-slow-ease), opacity 420ms var(--retake-ease);
+}
+.controller.expanding .capsule {
+  transition: left 980ms var(--retake-slow-ease), width 980ms var(--retake-slow-ease), background-color 980ms var(--retake-slow-ease), opacity 420ms var(--retake-ease);
+}
+.cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+}
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 0;
+  padding: 0 14px;
+  color: #fff;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 0.16);
+  transition: opacity 420ms var(--retake-ease), filter 420ms var(--retake-ease), transform 980ms var(--retake-slow-ease);
+}
+.label { transition: opacity 300ms var(--retake-ease), filter 420ms var(--retake-ease), transform 980ms var(--retake-slow-ease); font-variant-numeric: tabular-nums; }
+.controller.highlight .label { opacity: 0.5; }
+button.cell {
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+button.cell:disabled { cursor: default; }
+.controller.loading button.cell { opacity: 0.55; }
+.cell .t { display: inline-block; transition: opacity 300ms var(--retake-ease), filter 300ms var(--retake-ease); }
+.controller.collapsed .cell:not(.chosen) { opacity: 0; filter: blur(10px); transform: scale(0.94); pointer-events: none; }
+.controller.expanding .cell,
+.controller.expanding .cell .t {
+  transition: opacity 760ms var(--retake-ease) 60ms, filter 760ms var(--retake-ease) 60ms, transform 980ms var(--retake-slow-ease);
+}
+.cell.chosen { transform: translate(var(--dx, 0px), var(--dy, 0px)); }
+.cell.no-move { transition: none !important; }
+.cell.leaving .t { opacity: 0; filter: blur(10px); }
+.cell.is-reset .t { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.cell .t.reveal { animation: reveal 520ms var(--retake-ease) both; }
+@keyframes reveal { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
+
+/* ───── Nube de precio ───── */
+.cloud {
+  position: absolute;
+  left: var(--cloud-x, 50%);
+  bottom: calc(100% + 6px);
+  width: 150px;
+  height: 104px;
+  margin-left: -75px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px) scale(0.82);
+  transform-origin: 50% 100%;
+  transition: opacity 260ms var(--retake-ease), transform 420ms var(--retake-ease), left 520ms var(--retake-ease);
+  z-index: 3;
+}
+.cloud.show { opacity: 1; transform: none; }
+.cloud-float { position: absolute; inset: 0; animation: float 3.4s ease-in-out infinite; }
+.cloud svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 10px 18px rgb(4 20 34 / 0.28)); }
+.cloud-txt {
+  position: absolute;
+  left: 0; right: 0; top: 22px;
+  display: flex; flex-direction: column; align-items: center;
+  color: var(--ink);
+  text-shadow: none;
+  line-height: 1;
+}
+.cloud-txt strong { font-size: 27px; font-weight: 700; letter-spacing: -0.04em; }
+.cloud-txt span { margin-top: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: #4a6577; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* ───── Header ───── */
+.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: calc(58px + env(safe-area-inset-top)) 40px 40px;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 0.18);
+}
+.brand { display: inline-flex; align-items: center; color: #fff; text-decoration: none; border-radius: 6px; }
+.brand svg { height: 34px; width: auto; display: block; filter: drop-shadow(0 1px 5px rgb(0 0 0 / 0.3)); }
+.meta {
+  display: flex;
+  align-items: center;
+  margin-left: clamp(48px, 5vw, 70px);
+  gap: clamp(28px, 3vw, 44px);
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.meta a { text-decoration: none; padding: 6px 0; }
+.meta a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.cta {
+  position: relative;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 152px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.75);
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease;
+}
+.cta:hover, .cta:focus-visible { background: #fff; color: #0b1a26; border-color: #fff; text-shadow: none; }
+
+/* ───── Aviso ───── */
+.notice {
+  position: absolute;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 10px 10px 10px 18px;
+  border-radius: 20px;
+  background: rgb(11 26 38 / 0.8);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 0.25);
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+.notice[hidden] { display: none; }
+.notice p { margin: 0; max-width: 520px; }
+.notice code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; }
+.notice button {
+  flex: none; min-height: 40px; padding: 0 18px; border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.75); background: #fff; color: #0b1a26;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.notice button[hidden] { display: none; }
+
+/* ═════════ SECCIONES ═════════ */
+.section { position: relative; padding: clamp(76px, 10vw, 132px) 24px; background: var(--ink); scroll-margin-top: 0; }
+.section.alt { background: var(--ink-2); }
+.wrap { width: min(1140px, 100%); margin: 0 auto; }
+.eyebrow { margin: 0 0 14px; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sky); }
+.section h2 { margin: 0 0 18px; font-size: clamp(38px, 5.4vw, 68px); font-weight: 500; line-height: 0.95; letter-spacing: -0.045em; }
+.lead { margin: 0; max-width: 640px; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.45; letter-spacing: -0.01em; color: var(--muted); }
+.head { margin-bottom: clamp(36px, 5vw, 56px); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 0 22px; border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.75); background: #fff; color: var(--ink);
+  font-size: 16px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; cursor: pointer;
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, transform 220ms var(--retake-ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.35); }
+.btn.ghost:hover { border-color: #fff; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.055), rgb(255 255 255 / 0.018));
+}
+.stars { display: inline-flex; gap: 2px; color: var(--gold); }
+.stars svg { width: 1em; height: 1em; }
+
+/* ───── Servicios ───── */
+.svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 18px; }
+.svc {
+  position: relative;
+  display: flex; flex-direction: column;
+  padding: 28px 28px 24px;
+  scroll-margin-top: 30vh;
+  transition: border-color 400ms ease, box-shadow 600ms var(--retake-ease), transform 400ms var(--retake-ease);
+}
+.svc:hover { border-color: rgb(255 255 255 / 0.22); }
+.svc.flash { border-color: var(--sky); box-shadow: 0 0 0 3px rgb(159 194 214 / 0.35), 0 24px 60px rgb(0 0 0 / 0.35); transform: translateY(-4px); }
+.svc-icon {
+  width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center;
+  background: rgb(159 194 214 / 0.12); color: var(--sky); margin-bottom: 22px;
+}
+.svc-icon svg { width: 28px; height: 28px; }
+.svc h3 { margin: 0 0 8px; font-size: 26px; font-weight: 600; letter-spacing: -0.04em; }
+.svc h3:focus { outline: none; }
+.svc p { margin: 0 0 24px; color: var(--muted); font-size: 16px; line-height: 1.45; letter-spacing: -0.01em; }
+.svc-foot { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-top: 20px; border-top: 1px solid var(--line); }
+.svc-price { font-size: 38px; font-weight: 600; letter-spacing: -0.05em; color: var(--gold); line-height: 1; }
+.svc-price small { font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--muted); margin-right: 4px; }
+.svc-dur { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); letter-spacing: 0; }
+.svc .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
+.svc-note { margin: 22px 0 0; font-size: 14px; color: rgb(255 255 255 / 0.5); }
+
+/* ───── Reservas ───── */
+.book { padding: clamp(18px, 3vw, 34px); }
+.book-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); }
+.step-title { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: #fff; }
+.step-title b { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: rgb(159 194 214 / 0.16); color: var(--sky); font-size: 13px; }
+.step-title span { color: var(--muted); font-weight: 500; letter-spacing: 0; }
+.bk-block + .bk-block { margin-top: 30px; }
+.bk-svcs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; border: 0; padding: 0; margin: 0; }
+.bk-svc { position: relative; }
+.bk-svc input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.bk-svc label {
+  display: flex; flex-direction: column; gap: 4px; padding: 13px 14px; border-radius: 16px;
+  border: 1px solid var(--line); background: rgb(255 255 255 / 0.03); cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+.bk-svc label strong { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.bk-svc label span { font-size: 13px; color: var(--muted); }
+.bk-svc input:checked + label { border-color: var(--sky); background: rgb(159 194 214 / 0.13); }
+.bk-svc input:focus-visible + label { outline: 2px solid #fff; outline-offset: 2px; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.cal-head h4 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.03em; text-transform: capitalize; }
+.cal-nav { display: flex; gap: 6px; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--line); background: transparent; color: #fff; cursor: pointer; font-size: 18px;
+}
+.icon-btn:disabled { opacity: 0.3; cursor: default; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.cal-dow { text-align: center; font-size: 12px; font-weight: 600; color: rgb(255 255 255 / 0.45); padding: 4px 0 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+.day {
+  position: relative; aspect-ratio: 1 / 0.92; min-height: 42px; border-radius: 12px;
+  border: 1px solid transparent; background: rgb(255 255 255 / 0.04); color: #fff;
+  font-size: 15px; font-weight: 600; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.day small { font-size: 10px; font-weight: 600; color: var(--ok); letter-spacing: 0.02em; }
+.day:hover:not(:disabled) { border-color: rgb(255 255 255 / 0.3); }
+.day:disabled { background: transparent; color: rgb(255 255 255 / 0.24); cursor: default; }
+.day:disabled small { color: rgb(255 255 255 / 0.28); }
+.day.today { border-color: rgb(255 255 255 / 0.25); }
+.day[aria-pressed="true"] { background: #fff; color: var(--ink); border-color: #fff; }
+.day[aria-pressed="true"] small { color: #2f7d55; }
+.day.pad { visibility: hidden; }
+.cal-legend { margin: 12px 0 0; font-size: 13px; color: rgb(255 255 255 / 0.5); }
+.slots-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.slot-group + .slot-group { margin-top: 16px; }
+.slot-group h5 { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgb(255 255 255 / 0.5); }
+.slot-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.slot {
+  min-width: 74px; min-height: 42px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: rgb(255 255 255 / 0.04); color: #fff;
+  font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.slot:hover { border-color: rgb(255 255 255 / 0.4); }
+.slot[aria-pressed="true"] { background: #fff; color: var(--ink); border-color: #fff; }
+.slots-empty { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
+.bk-form { display: grid; gap: 14px; }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.field input {
+  min-height: 48px; padding: 0 16px; border-radius: 14px; border: 1px solid rgb(255 255 255 / 0.18);
+  background: rgb(0 0 0 / 0.18); color: #fff; font-size: 16px;
+}
+.field input::placeholder { color: rgb(255 255 255 / 0.35); }
+.field input:focus { outline: none; border-color: var(--sky); box-shadow: 0 0 0 3px rgb(159 194 214 / 0.25); }
+.field input[aria-invalid="true"] { border-color: var(--red); }
+.field .err { min-height: 0; font-size: 13px; color: #ff9da2; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.check input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: #9fc2d6; flex: none; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.summary {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; padding: 14px 16px; border-radius: 16px;
+  background: rgb(159 194 214 / 0.09); border: 1px solid rgb(159 194 214 / 0.22); font-size: 15px; line-height: 1.35;
+}
+.summary strong { font-weight: 600; }
+.summary .price { margin-left: auto; color: var(--gold); font-weight: 700; font-size: 18px; }
+.bk-msg { margin: 0; font-size: 14px; line-height: 1.45; }
+.bk-msg.err { color: #ff9da2; }
+.bk-demo { margin: 18px 0 0; font-size: 13px; color: rgb(255 255 255 / 0.5); line-height: 1.45; }
+.bk-demo[hidden] { display: none; }
+.done { text-align: center; padding: clamp(20px, 5vw, 50px) 10px; }
+.done[hidden] { display: none; }
+.done .tick { width: 64px; height: 64px; margin: 0 auto 18px; border-radius: 50%; display: grid; place-items: center; background: rgb(127 214 168 / 0.16); color: var(--ok); }
+.done h3 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 36px); font-weight: 600; letter-spacing: -0.04em; }
+.done p { margin: 0 auto 8px; max-width: 520px; color: var(--muted); line-height: 1.5; }
+.done .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+.book-main[hidden] { display: none; }
+
+/* ───── Reseñas ───── */
+.rev-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 18px; }
+.rev-score { padding: 34px; display: flex; flex-direction: column; gap: 10px; }
+.rev-score .big { font-size: clamp(72px, 9vw, 112px); font-weight: 500; letter-spacing: -0.06em; line-height: 0.9; }
+.rev-score .stars { font-size: 26px; }
+.rev-score p { margin: 0; color: var(--muted); font-size: 16px; }
+.rev-score .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 20px; }
+.rev-main { padding: 34px; display: flex; flex-direction: column; gap: 26px; }
+.rev-quote { margin: 0; }
+.rev-quote blockquote { margin: 0 0 12px; font-size: clamp(22px, 2.4vw, 30px); font-weight: 500; line-height: 1.2; letter-spacing: -0.035em; }
+.rev-quote figcaption { color: var(--muted); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgb(255 255 255 / 0.05); border: 1px solid var(--line); font-size: 14px; }
+.chips li b { font-weight: 700; color: var(--sky); font-variant-numeric: tabular-nums; }
+.rev-people { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.rev-people li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 16px; background: rgb(255 255 255 / 0.03); }
+.avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; font-weight: 700; color: var(--ink); background: var(--sky); flex: none; }
+.rev-people strong { display: block; font-size: 14px; font-weight: 600; }
+.rev-people span { font-size: 12px; color: var(--muted); }
+.rev-people .stars { font-size: 11px; }
+.rev-small { margin: 0; font-size: 13px; color: rgb(255 255 255 / 0.45); }
+
+/* ───── Contacto ───── */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 18px; align-items: stretch; }
+.map-box { position: relative; min-height: 480px; overflow: hidden; padding: 0; }
+.map { position: absolute; inset: 0; background: #dfe7ea; }
+.map-fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 30px; text-align: center; color: var(--ink); font-size: 15px; }
+.map-replay {
+  position: absolute; left: 14px; bottom: 14px; z-index: 600;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px;
+  border: 0; background: rgb(11 26 38 / 0.86); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.25);
+}
+.map-replay[hidden] { display: none; }
+.map-streets {
+  position: absolute; right: 14px; top: 14px; z-index: 600; max-width: 60%;
+  padding: 8px 12px; border-radius: 12px; background: rgb(255 255 255 / 0.92); color: var(--ink);
+  font-size: 12px; line-height: 1.4; box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+}
+.map-streets b { font-weight: 700; }
+.leaflet-container { font-family: 'Manrope', system-ui, sans-serif; }
+.leaflet-tile-pane { filter: saturate(0.72) contrast(0.96) brightness(1.03); }
+.leaflet-control-attribution { font-size: 10px; }
+.shop-pin { position: relative; }
+.shop-pin .badge {
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50% 50% 50% 4px; rotate: -45deg;
+  background: #0b1a26; border: 3px solid #fff; box-shadow: 0 8px 20px rgb(0 0 0 / 0.35);
+}
+.shop-pin .badge svg { width: 38px; rotate: 45deg; }
+.shop-pin .pulse {
+  position: absolute; left: 50%; bottom: -10px; width: 26px; height: 12px; margin-left: -13px; border-radius: 50%;
+  background: rgb(11 26 38 / 0.35);
+}
+.shop-pin.bump .badge { animation: bump 520ms var(--retake-ease); }
+@keyframes bump { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.18); } 100% { transform: translateX(-50%) scale(1); } }
+.walker { pointer-events: none; }
+.walker-in { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; transform-origin: 50% 100%; transition: opacity 360ms ease, transform 420ms var(--retake-ease); }
+.walker-in img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform-origin: 50% 100%; filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.35)); }
+.walker.left .walker-in img { scale: -1 1; }
+.walker.walking .walker-in img { animation: waddle 420ms ease-in-out infinite; }
+.walker.gone .walker-in { opacity: 0; transform: scale(0.2) translateY(-6px); }
+.walker.hidden { visibility: hidden; }
+@keyframes waddle {
+  0% { transform: rotate(-6deg) translateY(0); }
+  25% { transform: rotate(0deg) translateY(-3px); }
+  50% { transform: rotate(6deg) translateY(0); }
+  75% { transform: rotate(0deg) translateY(-3px); }
+  100% { transform: rotate(-6deg) translateY(0); }
+}
+.puff { position: absolute; left: 50%; bottom: 20px; width: 0; height: 0; pointer-events: none; }
+.puff i { position: absolute; width: 14px; height: 14px; margin: -7px; border-radius: 50%; background: #fff; opacity: 0; box-shadow: 0 2px 6px rgb(0 0 0 / 0.2); }
+.puff.go i { animation: puff 620ms ease-out forwards; }
+@keyframes puff { 0% { opacity: 0.95; transform: translate(0, 0) scale(0.4); } 100% { opacity: 0; transform: translate(var(--px), var(--py)) scale(1.2); } }
+.info { padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+.info h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky); }
+.info p { margin: 0; font-size: 17px; line-height: 1.45; letter-spacing: -0.01em; }
+.info .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 14px; font-weight: 600; background: rgb(255 255 255 / 0.06); }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.status.open::before { background: var(--ok); }
+.hours { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 15px; }
+.hours th, .hours td { padding: 8px 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 500; }
+.hours td { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hours tr.today th, .hours tr.today td { color: #fff; font-weight: 700; }
+
+/* ───── Pie ───── */
+.foot { padding: 46px 24px calc(46px + env(safe-area-inset-bottom)); background: #071119; border-top: 1px solid var(--line); }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center; justify-content: space-between; }
+.foot svg { height: 30px; width: auto; }
+.foot p { margin: 0; font-size: 14px; color: rgb(255 255 255 / 0.55); line-height: 1.5; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; }
+.foot nav a { color: rgb(255 255 255 / 0.7); text-decoration: none; }
+.foot nav a:hover { color: #fff; text-decoration: underline; }
+
+/* ═════════ RESPONSIVE ═════════ */
+@media (max-width: 1000px) {
+  .rev-grid, .contact-grid { grid-template-columns: 1fr; }
+  .book-grid { grid-template-columns: 1fr; }
+  .map-box { min-height: 420px; }
+}
+@media (max-width: 900px) {
+  .top { padding: calc(24px + env(safe-area-inset-top)) 24px 24px; }
+  .meta { font-size: 14px; gap: 22px; margin-left: 34px; }
+  .cta { width: 116px; height: 36px; font-size: 14px; }
+  .cell { font-size: clamp(15px, 2.2vw, 21px); padding: 0 6px; }
+}
+@media (max-width: 700px) {
+  .top { padding-left: 18px; padding-right: 18px; }
+  .brand svg { height: 28px; }
+  .meta { display: none; }
+  .cta { width: 104px; height: 34px; font-size: 13px; }
+  .cta::after { content: ""; position: absolute; inset: -6px -10px; }
+
+  .title { top: 34%; width: calc(100vw - 40px); font-size: clamp(48px, 14vw, 64px); line-height: 0.88; white-space: normal; }
+  .copy { top: 79%; width: calc(100vw - 44px); font-size: 14px; }
+
+  .controller { top: 50%; width: calc(100vw - 40px); height: 210px; }
+  .track { top: 0; height: 210px; border-radius: 28px; }
+  .cells { grid-template-columns: 1fr 1fr; grid-template-rows: 48px 54px 54px 54px; }
+  .label { grid-column: 1 / -1; }
+  .cell { font-size: 17px; padding: 0 8px; border-radius: 0; }
+  button.cell { border-radius: 0; border-top: 1px solid rgb(255 255 255 / 0.12); }
+  button.cell[data-scene="barba"], button.cell[data-scene="tinte"] { border-left: 1px solid rgb(255 255 255 / 0.12); }
+  button.cell[data-scene="completo"] { grid-column: 1 / -1; border-radius: 0 0 27px 27px; }
+  button.cell:active { background: rgb(255 255 255 / 0.08); }
+  button.cell:focus-visible { outline-offset: -3px; }
+  .controller.highlight .label { opacity: 1; }
+
+  .capsule { opacity: 0; pointer-events: none; transition: opacity 420ms var(--retake-ease); }
+  .controller.collapsed .capsule {
+    opacity: 1; left: 50%; top: 4vh; top: 4dvh; transform: translate(-50%, -50%);
+    width: 196px; height: 64px; border-radius: 999px; background-color: rgb(246 251 255 / 0.18);
+    transition: opacity 420ms var(--retake-ease);
+  }
+  .controller.expanding .capsule { transition: opacity 420ms var(--retake-ease); }
+  .controller.cap-fade .capsule {
+    left: 50%; top: 4vh; top: 4dvh; transform: translate(-50%, -50%);
+    width: 196px; height: 64px; border-radius: 999px; opacity: 0; background-color: rgb(246 251 255 / 0.18);
+  }
+  .controller.collapsed .track {
+    left: calc(50% - 94px); width: 188px; top: calc(4vh - 28px); top: calc(4dvh - 28px); height: 56px; border-radius: 999px;
+  }
+  .controller.collapsed button.cell.chosen { border-color: transparent; background: transparent; }
+  .cloud { bottom: auto; top: calc(4vh - 136px); top: calc(4dvh - 136px); }
+
+  .section { padding-left: 18px; padding-right: 18px; }
+  .two { grid-template-columns: 1fr; }
+  .rev-score, .rev-main, .info { padding: 24px; }
+  .map-box { min-height: 380px; }
+  .svc { padding: 24px 22px 20px; }
+  .book { padding: 16px; }
+  .cal-grid { gap: 4px; }
+  .day { border-radius: 10px; font-size: 14px; min-width: 0; min-height: 0; aspect-ratio: auto; height: 46px; }
+  .day small .w { display: none; }
+  .day:disabled small { display: none; }
+  .map-streets { left: 14px; right: auto; top: auto; bottom: 64px; max-width: calc(100% - 28px); }
+}
+@media (max-width: 700px) and (max-height: 700px) {
+  .title { top: 28.5%; font-size: clamp(40px, 12.5vw, 54px); }
+  .controller { top: 48%; height: 196px; }
+  .track { height: 196px; }
+  .cells { grid-template-rows: 44px 50px 50px 52px; }
+  .copy { top: calc(48% + 206px); width: calc(100vw - 32px); font-size: 13px; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .title { top: 20%; font-size: clamp(34px, 8vh, 56px); }
+  .controller.collapsed .cloud { left: calc(50% + 182px); top: -20px; bottom: auto; }
+  .controller { top: 50%; }
+  .copy { top: auto; bottom: 8px; font-size: 13px; }
+  .copy .sub { display: none; }
+}
+@media (max-width: 700px) and (max-height: 520px) and (orientation: landscape) {
+  .title { top: 12%; font-size: clamp(28px, 7vh, 44px); white-space: nowrap; }
+  .controller { top: 46%; height: 118px; }
+  .track { height: 118px; }
+  .cells { grid-template-columns: repeat(3, 1fr); grid-template-rows: 36px 41px 41px; }
+  .label { grid-column: 1 / -1; }
+  button.cell[data-scene="completo"] { grid-column: auto; border-radius: 0; }
+  button.cell[data-scene="lavado"], button.cell[data-scene="completo"] { border-left: 1px solid rgb(255 255 255 / 0.12); }
+  button.cell[data-scene="tinte"] { border-left: 0; }
+  .cell { font-size: 15px; }
+  .copy { bottom: 6px; font-size: 12px; }
+  .cloud { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .capsule, .track, .cell, .cell .t, .title span, .cta, .copy, .label, .cloud, .svc, .walker-in {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+  .cell .t.reveal, .cloud-float, .walker.walking .walker-in img, .shop-pin.bump .badge { animation: none !important; }
+  .controller.collapsed .cell:not(.chosen), .stage.title-hidden .title span, .copy.swap, .cell.leaving .t { filter: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Logotipo de AMV redibujado en SVG a partir del original (sustitúyelo por el archivo oficial cuando lo tengas) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="amv-silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#e6ebee"/>
+      <stop offset="0.55" stop-color="#a9b3ba"/>
+      <stop offset="1" stop-color="#dfe5e8"/>
+    </linearGradient>
+    <symbol id="amv-logo" viewBox="0 0 128 52">
+      <g fill="none" stroke="url(#amv-silver)" stroke-width="4.6" stroke-linejoin="miter" stroke-linecap="butt">
+        <path d="M3 38 L19 7 L35 38"/>
+        <path d="M40 38 L54 9 L63 27 L72 9 L80 38"/>
+        <path d="M85 8 L101 38 L117 8"/>
+      </g>
+      <rect x="21" y="31.6" width="9" height="3.2" fill="url(#amv-silver)"/>
+      <rect x="0" y="43.6" width="46" height="2.4" fill="url(#amv-silver)"/>
+      <text x="49" y="47.2" font-family="Manrope, system-ui, sans-serif" font-size="6.4" font-weight="600" letter-spacing="1.45" fill="#dfe5e8">SALÓN BARBERÍA</text>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+<section class="stage" id="stage" aria-label="Inicio">
+  <canvas class="media" id="scene" aria-hidden="true"></canvas>
+  <a class="scene-link" id="scene-link" href="#servicios" hidden></a>
+
+  <div class="hero">
+    <h1 class="title"><span>Barbería</span> <span>en</span> <span>Mérida</span></h1>
+    <p class="copy" id="copy">Corte, barba, lavado y color en pleno centro, a dos pasos del Arco de Trajano. Elige un servicio y mira cómo trabajamos antes de pedir tu cita.</p>
+  </div>
+
+  <div class="controller loading" id="controller" role="group" aria-label="Selector de servicio">
+    <div class="track glass" aria-hidden="true"></div>
+    <div class="capsule glass" aria-hidden="true"></div>
+    <div class="cloud" id="cloud" aria-hidden="true">
+      <div class="cloud-float">
+        <svg viewBox="0 0 150 104">
+          <g fill="#fbfdff">
+            <circle cx="44" cy="46" r="26"/><circle cx="76" cy="34" r="32"/><circle cx="108" cy="47" r="25"/>
+            <circle cx="60" cy="60" r="22"/><circle cx="94" cy="60" r="21"/><rect x="30" y="48" width="92" height="30" rx="15"/>
+            <circle cx="76" cy="90" r="6.5"/><circle cx="78" cy="101" r="3.6"/>
+          </g>
+        </svg>
+        <div class="cloud-txt"><strong id="cloud-price">12 €</strong><span id="cloud-dur">30 min</span></div>
+      </div>
+    </div>
+    <div class="cells">
+      <div class="cell label" id="label">Cargando…</div>
+      <button class="cell option" type="button" data-scene="corte"    disabled><span class="t">Corte</span></button>
+      <button class="cell option" type="button" data-scene="barba"    disabled><span class="t">Barba</span></button>
+      <button class="cell option" type="button" data-scene="lavado"   disabled><span class="t">Lavado</span></button>
+      <button class="cell option" type="button" data-scene="tinte"    disabled><span class="t">Tinte</span></button>
+      <button class="cell option" type="button" data-scene="completo" disabled><span class="t">Completo</span></button>
+    </div>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="#stage" aria-label="AMV Salón barbería, inicio"><svg viewBox="0 0 128 52" aria-hidden="true"><use href="#amv-logo"/></svg></a>
+    <nav class="meta" aria-label="Secciones"><a href="#servicios">Servicios</a><a href="#resenas">Reseñas</a><a href="#contacto">Contacto</a></nav>
+    <a class="cta" href="#reservar">Pedir cita</a>
+  </header>
+
+  <div class="sr-only" id="status" role="status" aria-live="polite"></div>
+  <div class="notice" id="notice" role="alert" hidden>
+    <p id="notice-text"></p>
+    <button type="button" id="retry">Reintentar</button>
+  </div>
+  <noscript><div class="notice"><p>Activa JavaScript para ver la barbería en 3D y reservar online. También puedes llamar al 628 51 22 94.</p></div></noscript>
+</section>
+
+<!-- ═════════ SERVICIOS ═════════ -->
+<section class="section" id="servicios" aria-labelledby="servicios-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Servicios y precios</p>
+      <h2 id="servicios-h">Lo que hacemos</h2>
+      <p class="lead">Trabajamos con cita para que no esperes. Elige tu servicio y resérvalo en un minuto.</p>
+    </div>
+    <div class="svc-grid" id="svc-grid"></div>
+    <p class="svc-note">Precios con IVA incluido.</p>
+  </div>
+</section>
+
+<!-- ═════════ RESERVAS ═════════ -->
+<section class="section alt" id="reservar" aria-labelledby="reservar-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Reserva online</p>
+      <h2 id="reservar-h">Pide tu cita</h2>
+      <p class="lead">Elige servicio, día y hora libre. Te confirmamos la cita al momento por correo.</p>
+    </div>
+    <div class="panel book" id="book">
+      <div class="book-main" id="bk-main">
+        <div class="book-grid">
+          <div>
+            <div class="bk-block">
+              <p class="step-title" id="bk-svc-t"><b>1</b>Servicio</p>
+              <div class="bk-svcs" id="bk-svcs" role="radiogroup" aria-labelledby="bk-svc-t"></div>
+            </div>
+            <div class="bk-block">
+              <p class="step-title"><b>2</b>Día <span id="bk-dur"></span></p>
+              <div class="cal-head">
+                <h4 id="bk-month" aria-live="polite"></h4>
+                <div class="cal-nav">
+                  <button class="icon-btn" type="button" id="bk-prev" aria-label="Mes anterior">‹</button>
+                  <button class="icon-btn" type="button" id="bk-next" aria-label="Mes siguiente">›</button>
+                </div>
+              </div>
+              <div class="cal-grid" id="bk-grid"></div>
+              <p class="cal-legend" id="bk-legend">Cargando disponibilidad…</p>
+            </div>
+          </div>
+          <div>
+            <div class="bk-block">
+              <div class="slots-head"><p class="step-title"><b>3</b>Hora <span id="bk-day">elige un día</span></p></div>
+              <div id="bk-slots"><p class="slots-empty">Selecciona un día del calendario para ver las horas libres.</p></div>
+            </div>
+            <form class="bk-block bk-form" id="bk-form" novalidate>
+              <p class="step-title"><b>4</b>Tus datos</p>
+              <div class="field">
+                <label for="bk-name">Nombre y apellidos</label>
+                <input id="bk-name" name="nombre" autocomplete="name" required maxlength="80" placeholder="Tu nombre">
+                <span class="err" id="bk-name-e"></span>
+              </div>
+              <div class="two">
+                <div class="field">
+                  <label for="bk-email">Correo electrónico</label>
+                  <input id="bk-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120" placeholder="tu@correo.com">
+                  <span class="err" id="bk-email-e"></span>
+                </div>
+                <div class="field">
+                  <label for="bk-tel">Teléfono</label>
+                  <input id="bk-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="600 000 000">
+                  <span class="err" id="bk-tel-e"></span>
+                </div>
+              </div>
+              <div class="hp" aria-hidden="true"><label>Web <input name="web" tabindex="-1" autocomplete="off"></label></div>
+              <label class="check"><input type="checkbox" id="bk-ok" required> <span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>. Usaremos tus datos solo para gestionar la cita.</span></label>
+              <div class="summary" id="bk-sum" aria-live="polite"></div>
+              <p class="bk-msg" id="bk-msg" role="alert"></p>
+              <button class="btn" type="submit" id="bk-submit">Confirmar reserva</button>
+            </form>
+          </div>
+        </div>
+        <p class="bk-demo" id="bk-demo" hidden>Modo demostración: las reservas se guardan solo en este navegador y no se envía ningún correo. Para activarlas de verdad, conecta el calendario siguiendo el archivo LEEME.</p>
+      </div>
+      <div class="done" id="bk-done" hidden tabindex="-1">
+        <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+        <h3 id="bk-done-h">¡Reserva confirmada!</h3>
+        <p id="bk-done-p"></p>
+        <p id="bk-done-mail"></p>
+        <div class="row">
+          <a class="btn" id="bk-gcal" target="_blank" rel="noopener">Añadir a mi calendario</a>
+          <button class="btn ghost" type="button" id="bk-again">Hacer otra reserva</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ RESEÑAS ═════════ -->
+<section class="section" id="resenas" aria-labelledby="resenas-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Reseñas</p>
+      <h2 id="resenas-h">Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="panel rev-score">
+        <span class="big" id="rev-avg">5,0</span>
+        <span class="stars" id="rev-stars" aria-label="5 de 5 estrellas"></span>
+        <p id="rev-count">7 reseñas en Google</p>
+        <div class="row">
+          <a class="btn" id="rev-all" target="_blank" rel="noopener">Leer reseñas</a>
+          <a class="btn ghost" id="rev-write" target="_blank" rel="noopener">Escribir una reseña</a>
+        </div>
+      </div>
+      <div class="panel rev-main">
+        <figure class="rev-quote">
+          <blockquote id="rev-q"></blockquote>
+          <figcaption id="rev-qa"></figcaption>
+        </figure>
+        <div>
+          <p class="step-title" style="margin-bottom:12px">Lo que más destacan</p>
+          <ul class="chips" id="rev-themes"></ul>
+        </div>
+        <ul class="rev-people" id="rev-people" aria-label="Personas que han dejado reseña"></ul>
+        <p class="rev-small">Resumen de las reseñas públicas de Google. Todas las valoraciones son de 5 estrellas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CONTACTO ═════════ -->
+<section class="section alt" id="contacto" aria-labelledby="contacto-h">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Contacto y horario</p>
+      <h2 id="contacto-h">Ven a vernos</h2>
+      <p class="lead">Estamos en la calle San Salvador, en el centro de Mérida. Así se llega desde la calle de San Juan de Dios.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="panel map-box">
+        <div class="map" id="map" role="region" aria-label="Mapa con la ubicación de AMV Salón barbería"></div>
+        <div class="map-streets" aria-hidden="true">Ruta: <b>C. de San Juan de Dios</b> → <b>C. San Salvador</b></div>
+        <button class="map-replay" type="button" id="map-replay" hidden>▶ Ver el paseo</button>
+      </div>
+      <div class="panel info">
+        <div>
+          <h3>Dirección</h3>
+          <p id="ct-addr">C. San Salvador, 35<br>06800 Mérida, Badajoz</p>
+          <div class="row"><a class="btn" id="ct-route" target="_blank" rel="noopener">Cómo llegar</a></div>
+        </div>
+        <div>
+          <h3>Teléfono e Instagram</h3>
+          <p><a id="ct-tel" href="tel:+34628512294">628 51 22 94</a><br><a id="ct-ig" href="https://www.instagram.com/albertomoyabarberia/" target="_blank" rel="noopener">@albertomoyabarberia</a></p>
+          <div class="row"><a class="btn ghost" href="tel:+34628512294">Llamar</a></div>
+        </div>
+        <div>
+          <h3>Horario</h3>
+          <span class="status" id="ct-status">Consultando…</span>
+          <table class="hours" id="ct-hours" aria-label="Horario semanal"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <svg viewBox="0 0 128 52" role="img" aria-label="AMV Salón barbería"><use href="#amv-logo"/></svg>
+    <p>AMV Salón barbería · C. San Salvador, 35 · 06800 Mérida · 628 51 22 94</p>
+    <nav aria-label="Legal"><a href="privacidad.html">Privacidad</a><a href="#reservar">Reservar</a><a href="https://www.instagram.com/albertomoyabarberia/" target="_blank" rel="noopener">Instagram</a></nav>
+  </div>
+</footer>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+
+/* ═════════════════════════════════════════════════════════════
+   1. CONFIGURACIÓN — todo lo editable está aquí
+   ═════════════════════════════════════════════════════════════ */
+const NEGOCIO = {
+  nombre: 'AMV Salón barbería',
+  direccion: 'C. San Salvador, 35, 06800 Mérida, Badajoz',
+  telefono: '628 51 22 94',
+  lat: 38.9175549, lng: -6.3489457,
+  fichaGoogle: 'https://maps.google.com/?cid=11728547744835302622',
+  comoLlegar: 'https://www.google.com/maps/dir/?api=1&destination=38.9175549%2C-6.3489457'
+};
+
+// Horario real (0 = domingo … 6 = sábado). Debe coincidir con el de apps-script/Code.gs
+const HORARIO = {
+  1: [['10:00', '14:00'], ['16:30', '20:30']],
+  2: [['10:00', '14:00'], ['16:30', '20:30']],
+  3: [['10:00', '14:00'], ['16:30', '20:30']],
+  4: [['10:00', '14:00'], ['16:30', '20:30']],
+  5: [['10:00', '14:00'], ['16:30', '20:30']],
+  6: [['09:30', '14:00']],
+  0: []
+};
+
+// Precios ficticios salvo el corte (12 €). Duraciones en minutos; deben coincidir con Code.gs
+const SERVICIOS = {
+  corte:    { nombre: 'Corte de pelo',     precio: 12, desde: false, min: 30, texto: 'Tijera o máquina adaptado a tu estilo, con perfilado de nuca y patillas y peinado final.', ida: 2.3, vuelta: 1.9 },
+  barba:    { nombre: 'Arreglo de barba',  precio: 8,  desde: false, min: 20, texto: 'Brocha, espuma caliente y navaja para un perfilado limpio, con toalla y aceite.',          ida: 2.4, vuelta: 2.0 },
+  lavado:   { nombre: 'Lavado de cabeza',  precio: 4,  desde: false, min: 15, texto: 'Champú, masaje relajante y secado. El mejor comienzo para cualquier corte.',               ida: 2.3, vuelta: 1.9 },
+  tinte:    { nombre: 'Tinte',             precio: 18, desde: true,  min: 45, texto: 'Color para pelo o barba, del castaño natural al cobrizo más atrevido.',                    ida: 2.4, vuelta: 2.0 },
+  completo: { nombre: 'Servicio completo', precio: 30, desde: false, min: 90, texto: 'Corte, barba, lavado y tinte en una sola cita, con precio especial.',                       ida: 3.2, vuelta: 2.6 }
+};
+
+const RESERVAS = {
+  url: '',          // ← pega aquí la URL de la aplicación web de Google Apps Script (ver LEEME.md)
+  dias: 30,         // días que se pueden reservar por adelantado
+  paso: 15,         // minutos entre horas ofrecidas
+  antelacion: 60    // minutos mínimos de antelación
+};
+
+// Resumen de las 7 reseñas públicas de Google (todas de 5 estrellas)
+const RESENAS = {
+  media: 5.0, total: 7,
+  cita: { texto: 'El corte y el arreglo de barba han quedado perfectos, justo como quería.', autor: 'Andrés D.' },
+  temas: [['Trato cercano y profesional', 6], ['Local cómodo y agradable', 3], ['Cuidado del detalle', 2], ['Buen asesoramiento', 2], ['Puntualidad con las citas', 1], ['Precios económicos', 1], ['Genial también con niños', 1]],
+  personas: [['Andrés D.', 'may. 2026'], ['Jaime M.', 'jun. 2026'], ['Yeray M.', 'ago. 2026'], ['Laura P.', 'abr. 2026'], ['Chestsilver', 'ene. 2026'], ['Joaquín B.', 'dic. 2025'], ['Jorge M.', 'oct. 2025']]
+};
+
+// Paseo del mapa: C. de San Juan de Dios → C. San Salvador (coordenadas reales de OpenStreetMap)
+const RUTA = [
+  [38.917325, -6.3471635], [38.9172873, -6.3472822], [38.9172218, -6.3473888], [38.9170919, -6.3475846],
+  [38.9168466, -6.3480025],                                   // giro a C. San Salvador
+  [38.9172945, -6.3485012], [38.9175857, -6.34891],           // puerta
+  [38.9175549, -6.3489457]                                    // la barbería
+];
+
+const CONFIG = {
+  modelos: {
+    // giroY en radianes: si un personaje sale de espaldas, pon Math.PI; de lado, ±Math.PI / 2.
+    peluquero: { url: 'modelos/peluquero.glb', altura: 1.78, giroY: 0 },
+    cliente:   { url: 'modelos/cliente.glb',   altura: 1.86, giroY: 0 }
+  },
+  colorTinte: '#b4532a',
+  dracoPath: 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/libs/draco/gltf/'
+};
+
+const fmtPrecio = (s) => `${s.desde ? 'desde ' : ''}${s.precio} €`;
+const fmtDur = (m) => m < 60 ? `${m} min` : `${Math.floor(m / 60)} h${m % 60 ? ' ' + (m % 60) + ' min' : ''}`;
+
+/* ═════════════════════════════════════════════════════════════
+   2. HERO · DOM + estado
+   ═════════════════════════════════════════════════════════════ */
+const $ = (s, r = document) => r.querySelector(s);
+const stage = $('#stage'), canvas = $('#scene'), controller = $('#controller');
+const labelEl = $('#label'), copyEl = $('#copy'), statusEl = $('#status');
+const notice = $('#notice'), noticeText = $('#notice-text'), retryBtn = $('#retry');
+const cloud = $('#cloud'), cloudPrice = $('#cloud-price'), cloudDur = $('#cloud-dur'), sceneLink = $('#scene-link');
+const buttons = Array.from(document.querySelectorAll('.option'));
+const DEFAULT_COPY = copyEl.innerHTML;
+const READY_LABEL = 'Servicios →';
+const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
+const mqPhone = matchMedia('(max-width: 700px)');
+const mqShortLandscape = matchMedia('(max-height: 520px) and (orientation: landscape)');
+const mqHover = matchMedia('(hover: hover)');
+
+buttons.forEach((b) => {
+  const s = SERVICIOS[b.dataset.scene];
+  b.dataset.label = b.textContent.trim();
+  b.dataset.aria = `${s.nombre}, ${fmtPrecio(s)}, ${fmtDur(s.min)}`;
+  b.setAttribute('aria-label', b.dataset.aria);
+});
+
+// scene: 'base' | servicio · playback: loading | ready | starting | playing | error
+const S = { scene: 'base', playback: 'loading', direction: 'forward', locked: true, token: 0, anim: null, chosen: null };
+
+let copyTimer = 0, sayTimer = 0;
+function say(msg) {
+  clearTimeout(sayTimer);
+  statusEl.textContent = '';
+  sayTimer = setTimeout(() => { statusEl.textContent = msg; }, 60);
+}
+function showNotice(html, onRetry) {
+  noticeText.innerHTML = html;
+  retryBtn.hidden = !onRetry;
+  retryBtn.onclick = onRetry ? () => { hideNotice(); onRetry(); } : null;
+  notice.hidden = false;
+}
+function hideNotice() { notice.hidden = true; }
+
+/* ───── Barra de cristal ───── */
+const COLS = buttons.length + 1;
+function capTo(i) {
+  let left, width;
+  if (i === 0) { left = '-5px'; width = 'calc(var(--col) + 5px)'; }
+  else if (i === COLS - 1) { left = `calc(var(--col) * ${i})`; width = 'calc(var(--col) + 5px)'; }
+  else { left = `calc(var(--col) * ${i})`; width = 'var(--col)'; }
+  controller.style.setProperty('--cap-left', left);
+  controller.style.setProperty('--cap-width', width);
+  controller.classList.toggle('highlight', i > 0);
+  if (i > 0 && !mqPhone.matches) showCloud(buttons[i - 1]); else if (S.scene === 'base') hideCloud();
+}
+const canHover = () => S.playback === 'ready' && S.scene === 'base' && !controller.classList.contains('collapsed');
+
+/* ───── Nube flotante con el precio ───── */
+function showCloud(b, centered) {
+  const s = SERVICIOS[b.dataset.scene];
+  cloudPrice.textContent = fmtPrecio(s).replace('desde ', 'desde ');
+  cloudPrice.style.fontSize = s.desde ? '21px' : '';
+  cloudDur.textContent = fmtDur(s.min);
+  let x;
+  if (centered) x = controller.clientWidth / 2;
+  else { const r = b.getBoundingClientRect(), c = controller.getBoundingClientRect(); x = r.left + r.width / 2 - c.left - (parseFloat(b.dataset.dx) || 0); }
+  controller.style.setProperty('--cloud-x', x + 'px');
+  cloud.classList.add('show');
+}
+function hideCloud() { cloud.classList.remove('show'); }
+
+buttons.forEach((b, k) => {
+  b.addEventListener('pointerenter', () => { if (canHover()) capTo(k + 1); });
+  b.addEventListener('focus', () => { if (canHover()) capTo(k + 1); });
+  b.addEventListener('blur', () => { if (canHover() && !controller.matches(':hover')) capTo(0); });
+  b.addEventListener('click', () => onPick(b));
+});
+controller.addEventListener('pointerleave', () => {
+  if (!canHover()) return;
+  const f = buttons.indexOf(document.activeElement);
+  if (f >= 0 && document.activeElement.matches(':focus-visible')) capTo(f + 1); else capTo(0);
+});
+controller.addEventListener('pointermove', (e) => {
+  const r = controller.getBoundingClientRect();
+  controller.style.setProperty('--glass-x', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+  controller.style.setProperty('--glass-y', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && S.scene !== 'base' && !S.locked && S.chosen) reverse(S.chosen, S.scene);
+});
+
+// mode: 'off' (todo bloqueado) · 'all' · 'only' (solo el elegido)
+function setControls(mode, hideOthers) {
+  buttons.forEach((b) => {
+    const enabled = mode === 'all' || (mode === 'only' && b === S.chosen);
+    const hidden = (mode === 'only' || hideOthers) && b !== S.chosen;
+    b.disabled = !enabled;
+    b.tabIndex = hidden ? -1 : 0;
+    if (hidden) b.setAttribute('aria-hidden', 'true'); else b.removeAttribute('aria-hidden');
+  });
+}
+function capsuleCenter() {
+  const r = controller.getBoundingClientRect();
+  if (mqPhone.matches) return { x: r.left + r.width / 2, y: r.top + window.innerHeight * 0.04 };
+  return { x: r.left + r.width / 2, y: r.top - 1 + 36 };
+}
+function placeChosen(b, instant) {
+  const r = b.getBoundingClientRect();
+  const cx = r.left + r.width / 2 - (parseFloat(b.dataset.dx) || 0);
+  const cy = r.top + r.height / 2 - (parseFloat(b.dataset.dy) || 0);
+  const t = capsuleCenter();
+  const dx = Math.round(t.x - cx), dy = Math.round(t.y - cy);
+  if (instant) b.classList.add('no-move');
+  b.dataset.dx = dx; b.dataset.dy = dy;
+  b.style.setProperty('--dx', dx + 'px');
+  b.style.setProperty('--dy', dy + 'px');
+  if (instant) { void b.offsetWidth; b.classList.remove('no-move'); }
+}
+function setLabelText(b, text, reveal) {
+  const t = b.querySelector('.t');
+  t.textContent = text;
+  t.classList.remove('reveal');
+  if (reveal) { void t.offsetWidth; t.classList.add('reveal'); }
+}
+function swapCopy(key) {
+  clearTimeout(copyTimer);
+  copyEl.classList.add('swap');
+  copyTimer = setTimeout(() => {
+    const s = SERVICIOS[key];
+    copyEl.innerHTML = s
+      ? `<strong>${s.nombre}</strong> · ${fmtDur(s.min)} · ${fmtPrecio(s)}<span class="sub">${s.texto}</span><a class="more" href="#servicio-${key}" data-go="${key}">Ver detalles y reservar ↓</a>`
+      : DEFAULT_COPY;
+    copyEl.classList.remove('swap');
+  }, 260);
+}
+copyEl.addEventListener('click', (e) => { const a = e.target.closest('[data-go]'); if (a) { e.preventDefault(); goToService(a.dataset.go); } });
+sceneLink.addEventListener('click', (e) => { e.preventDefault(); if (S.scene !== 'base') goToService(S.scene); });
+
+function onPick(b) {
+  if (S.locked || S.playback !== 'ready') return;
+  const key = b.dataset.scene;
+  if (S.scene === 'base') forward(b, key);
+  else if (S.scene === key) reverse(b, key);
+  // cualquier otro botón con un servicio abierto: no hace nada (primero hay que Volver)
+}
+
+function forward(b, key) {
+  const tok = ++S.token;                       // bloqueo síncrono, antes de cualquier espera
+  S.locked = true; S.playback = 'starting'; S.direction = 'forward'; S.chosen = b;
+  const hadFocus = document.activeElement === b;
+  setControls('off', true);
+  hideNotice();
+  placeChosen(b, false);
+  b.classList.add('chosen');
+  controller.classList.remove('highlight', 'expanding');
+  controller.classList.add('collapsed', 'rear-faded');   // mismo recálculo de estilos
+  showCloud(b, true);
+  const s = SERVICIOS[key];
+  say(`Mostrando ${s.nombre.toLowerCase()}…`);
+  S.playback = 'playing';
+  runAnim(key, 0, 1, s.ida, tok, () => { stage.classList.add('title-hidden'); swapCopy(key); }).then((ok) => {
+    if (!ok || tok !== S.token) return;
+    S.scene = key; S.playback = 'ready';
+    b.classList.add('is-reset');
+    setLabelText(b, 'Volver', true);
+    b.setAttribute('aria-label', `Volver al inicio (salir de ${s.nombre.toLowerCase()})`);
+    setControls('only');
+    sceneLink.href = `#servicio-${key}`;
+    sceneLink.setAttribute('aria-label', `Ver detalles y precio de ${s.nombre.toLowerCase()}`);
+    sceneLink.hidden = false;
+    if (hadFocus) b.focus({ preventScroll: true });
+    S.locked = false;
+    say(`${s.nombre}: ${fmtDur(s.min)}, ${fmtPrecio(s)}. ${s.texto} Pulsa la escena para ver el servicio o Volver para regresar.`);
+  });
+}
+
+function reverse(b, key) {
+  const tok = ++S.token;
+  S.locked = true; S.playback = 'playing'; S.direction = 'reverse';
+  const hadFocus = document.activeElement === b;
+  setControls('off', false);
+  sceneLink.hidden = true;
+  hideCloud();
+  controller.classList.add('expanding');
+  if (mqPhone.matches) { controller.classList.add('cap-fade'); setTimeout(() => controller.classList.remove('cap-fade'), 460); }
+  b.classList.add('leaving');
+  b.classList.remove('chosen');
+  controller.classList.remove('collapsed', 'rear-faded');
+  capTo(0);
+  swapCopy(null);
+  say('Volviendo al inicio…');
+  setTimeout(() => {
+    if (tok !== S.token) return;
+    setLabelText(b, b.dataset.label, false);
+    b.classList.remove('is-reset', 'leaving');
+    b.setAttribute('aria-label', b.dataset.aria);
+  }, mqReduce.matches ? 0 : 320);
+  runAnim(key, 1, 0, SERVICIOS[key].vuelta, tok).then((ok) => {
+    if (!ok || tok !== S.token) return;
+    S.scene = 'base'; S.playback = 'ready'; S.chosen = null;
+    delete b.dataset.dx; delete b.dataset.dy;
+    stage.classList.remove('title-hidden');
+    controller.classList.remove('expanding');
+    setControls('all');
+    if (hadFocus) b.focus({ preventScroll: true });
+    S.locked = false;
+    say('De vuelta al inicio. Elige otro servicio.');
+  });
+}
+
+/* ═════════════════════════════════════════════════════════════
+   3. Utilidades de animación
+   ═════════════════════════════════════════════════════════════ */
+const clamp01 = (x) => x < 0 ? 0 : x > 1 ? 1 : x;
+const seg = (p, a, b) => clamp01((p - a) / (b - a));
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeIO = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+const easeIn2 = (t) => t * t;
+const easeBack = (t) => { const c1 = 1.70158, c3 = c1 + 1; return t <= 0 ? 0 : 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+const smooth = (a, b, x) => { const t = clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* ═════════════════════════════════════════════════════════════
+   4. Escena 3D
+   ═════════════════════════════════════════════════════════════ */
+let renderer, scene, camera, rafId = 0, lastNow = 0, needsRender = false, poleSpin = 0;
+const W = {};
+const A = {};
+const _v = new THREE.Vector3(), _q = new THREE.Quaternion(), _m = new THREE.Matrix4(), _e = new THREE.Euler(), _s = new THREE.Vector3();
+
+const std = (color, roughness = 0.6, metalness = 0, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness, metalness, ...extra });
+function mesh(geo, mat, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); if (parent) parent.add(m); return m; }
+function canvasTex(w, h, draw, srgb = true) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 8;
+  return t;
+}
+
+function initGL() {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mqPhone.matches ? 1.5 : 2));
+  renderer.toneMapping = THREE.NeutralToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color('#132532');
+  camera = new THREE.PerspectiveCamera(36, 1, 0.05, 60);
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 0.32;
+  scene.fog = new THREE.Fog('#16242f', 5.5, 17);
+  pmrem.dispose();
+
+  buildRoom();
+  buildLights();
+  W.barber = new THREE.Group(); W.client = new THREE.Group();
+  scene.add(W.barber, W.client);
+  W.clientFX = new THREE.Group(); W.client.add(W.clientFX);
+  W.worldFX = new THREE.Group(); scene.add(W.worldFX);
+
+  canvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+    S.anim = null; S.playback = 'error';
+    setControls('off', false);
+    showNotice('Se ha perdido el contexto 3D del navegador. Recarga para volver a ver la barbería.', () => location.reload());
+  });
+}
+
+/* ───── Barbería: paredes azul pálido, nicho en arco, suelo ajedrezado ───── */
+function archPts(halfW, springY, bottomY, segs = 40) {
+  const pts = [new THREE.Vector2(-halfW, bottomY), new THREE.Vector2(-halfW, springY)];
+  for (let i = 1; i < segs; i++) { const a = Math.PI - Math.PI * i / segs; pts.push(new THREE.Vector2(Math.cos(a) * halfW, springY + Math.sin(a) * halfW)); }
+  pts.push(new THREE.Vector2(halfW, springY), new THREE.Vector2(halfW, bottomY));
+  return pts;
+}
+function buildRoom() {
+  const room = new THREE.Group(); scene.add(room);
+  const BACK = -2.6, HALF = 2.5, H = 4.4, DEPTH = 9.5;
+  const wallMat = std('#86a9be', 0.93), wainMat = std('#5d8399', 0.78), trimMat = std('#e9efef', 0.55), panelMat = std('#6a90a6', 0.7);
+
+  const floorTex = canvasTex(256, 256, (g, w, h) => {
+    g.fillStyle = '#e6decb'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#26323c'; g.fillRect(0, 0, w / 2, h / 2); g.fillRect(w / 2, h / 2, w / 2, h / 2);
+    g.strokeStyle = 'rgba(0,0,0,0.18)'; g.lineWidth = 2; g.strokeRect(0, 0, w, h); g.beginPath(); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.moveTo(0, h / 2); g.lineTo(w, h / 2); g.stroke();
+  });
+  floorTex.wrapS = floorTex.wrapT = THREE.RepeatWrapping;
+  floorTex.repeat.set(HALF * 2 / 0.8, DEPTH / 0.8);
+  const floor = mesh(new THREE.PlaneGeometry(HALF * 2, DEPTH), std('#ffffff', 0.4, 0, { map: floorTex, envMapIntensity: 0.7 }), room, 0, 0, BACK + DEPTH / 2);
+  floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true;
+
+  const NICHE_W = 1.12, SPRING = 1.62, NICHE_BOTTOM = 0.14, NICHE_D = 0.42;
+  const wallShape = new THREE.Shape([new THREE.Vector2(-HALF, 0), new THREE.Vector2(HALF, 0), new THREE.Vector2(HALF, H), new THREE.Vector2(-HALF, H)]);
+  wallShape.holes.push(new THREE.Path(archPts(NICHE_W, SPRING, NICHE_BOTTOM)));
+  const back = mesh(new THREE.ShapeGeometry(wallShape, 24), wallMat, room, 0, 0, BACK); back.receiveShadow = true;
+
+  const nicheTex = canvasTex(64, 256, (g, w, h) => {
+    const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#5f8299'); gr.addColorStop(0.55, '#6d91a7'); gr.addColorStop(1, '#4d6b7e');
+    g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  });
+  const nicheBackGeo = new THREE.ShapeGeometry(new THREE.Shape(archPts(NICHE_W, SPRING, NICHE_BOTTOM)), 24);
+  const pos = nicheBackGeo.attributes.position, uv = nicheBackGeo.attributes.uv;
+  for (let i = 0; i < pos.count; i++) uv.setXY(i, (pos.getX(i) + NICHE_W) / (2 * NICHE_W), (pos.getY(i) - NICHE_BOTTOM) / (SPRING + NICHE_W - NICHE_BOTTOM));
+  const nicheBack = mesh(nicheBackGeo, std('#ffffff', 0.95, 0, { map: nicheTex }), room, 0, 0, BACK - NICHE_D); nicheBack.receiveShadow = true;
+  const ap = archPts(NICHE_W, SPRING, NICHE_BOTTOM, 48), rv = [];
+  for (let i = 0; i < ap.length - 1; i++) {
+    const a = ap[i], b = ap[i + 1];
+    rv.push(a.x, a.y, 0, b.x, b.y, 0, b.x, b.y, -NICHE_D, a.x, a.y, 0, b.x, b.y, -NICHE_D, a.x, a.y, -NICHE_D);
+  }
+  const revealGeo = new THREE.BufferGeometry(); revealGeo.setAttribute('position', new THREE.Float32BufferAttribute(rv, 3)); revealGeo.computeVertexNormals();
+  const reveal = mesh(revealGeo, std('#7f9fb3', 0.9, 0, { side: THREE.DoubleSide }), room, 0, 0, BACK); reveal.receiveShadow = true;
+  mesh(new THREE.BoxGeometry(NICHE_W * 2, NICHE_BOTTOM, NICHE_D), trimMat, room, 0, NICHE_BOTTOM / 2, BACK - NICHE_D / 2);
+
+  const FR = 0.13;
+  const outer = archPts(NICHE_W + FR, SPRING, 0, 48), inner = archPts(NICHE_W, SPRING, 0, 48).reverse();
+  const frame = mesh(new THREE.ExtrudeGeometry(new THREE.Shape([...outer, ...inner]), { depth: 0.07, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 2, curveSegments: 24 }), trimMat, room, 0, 0, BACK);
+  frame.castShadow = true; frame.receiveShadow = true;
+  const key = mesh(new THREE.BoxGeometry(0.2, 0.3, 0.12), trimMat, room, 0, SPRING + NICHE_W + 0.06, BACK + 0.06); key.castShadow = true;
+
+  const wainH = 1.0;
+  for (const side of [-1, 1]) {
+    const x0 = (NICHE_W + FR) * side, x1 = HALF * side, w = Math.abs(x1 - x0), cx = (x0 + x1) / 2;
+    mesh(new THREE.BoxGeometry(w, wainH, 0.05), wainMat, room, cx, wainH / 2, BACK + 0.025).receiveShadow = true;
+    mesh(new THREE.BoxGeometry(w, 0.06, 0.09), trimMat, room, cx, wainH + 0.02, BACK + 0.045);
+    mesh(new THREE.BoxGeometry(w, 0.14, 0.07), trimMat, room, cx, 0.07, BACK + 0.035);
+    const n = Math.max(1, Math.round(w / 0.62)), pw = w / n;
+    for (let i = 0; i < n; i++) {
+      const px = Math.min(x0, x1) + pw * (i + 0.5);
+      mesh(new THREE.BoxGeometry(pw - 0.16, wainH - 0.36, 0.02), panelMat, room, px, wainH / 2 + 0.03, BACK + 0.058);
+    }
+  }
+  for (const side of [-1, 1]) {
+    const wall = mesh(new THREE.PlaneGeometry(DEPTH, H), wallMat, room, HALF * side, H / 2, BACK + DEPTH / 2);
+    wall.rotation.y = -side * Math.PI / 2; wall.receiveShadow = true;
+    const wain = mesh(new THREE.BoxGeometry(0.05, wainH, DEPTH), wainMat, room, HALF * side - side * 0.025, wainH / 2, BACK + DEPTH / 2); wain.receiveShadow = true;
+    mesh(new THREE.BoxGeometry(0.09, 0.06, DEPTH), trimMat, room, HALF * side - side * 0.045, wainH + 0.02, BACK + DEPTH / 2);
+    mesh(new THREE.BoxGeometry(0.07, 0.14, DEPTH), trimMat, room, HALF * side - side * 0.035, 0.07, BACK + DEPTH / 2);
+  }
+  W.sconces = [];
+  const brass = std('#c9a25a', 0.3, 1), pilMat = std('#7d9fb4', 0.85);
+  for (const side of [-1, 1]) {
+    const x = side * 1.66;
+    const pil = mesh(new THREE.BoxGeometry(0.24, 3.0, 0.1), pilMat, room, x, 1.5, BACK + 0.05); pil.castShadow = true; pil.receiveShadow = true;
+    mesh(new THREE.BoxGeometry(0.34, 0.08, 0.15), trimMat, room, x, 3.02, BACK + 0.075);
+    mesh(new THREE.BoxGeometry(0.32, 0.18, 0.14), trimMat, room, x, 0.09, BACK + 0.07);
+    const plate = mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.02, 24), brass, room, x, 2.02, BACK + 0.11); plate.rotation.x = Math.PI / 2;
+    const arm = mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.16, 12), brass, room, x, 2.06, BACK + 0.18); arm.rotation.x = Math.PI / 2.6;
+    mesh(new THREE.CylinderGeometry(0.035, 0.05, 0.04, 20), brass, room, x, 2.11, BACK + 0.25);
+    const globe = mesh(new THREE.SphereGeometry(0.075, 24, 16), std('#fff3dc', 0.35, 0, { emissive: '#ffd59a', emissiveIntensity: 2.2 }), room, x, 2.2, BACK + 0.25);
+    const pl = new THREE.PointLight('#ffc98a', 3.2, 4.5, 2); pl.position.set(x, 2.2, BACK + 0.38); room.add(pl);
+    W.sconces.push({ globe, light: pl });
+  }
+  const poleTex = canvasTex(256, 256, (g, w, h) => {
+    g.fillStyle = '#f6f3ee'; g.fillRect(0, 0, w, h);
+    const band = w / 4;
+    for (let i = -4; i < 8; i++) {
+      g.fillStyle = i % 2 === 0 ? '#c8323a' : '#24508f';
+      g.beginPath(); const x = i * band * 2; g.moveTo(x, h); g.lineTo(x + band * 0.9, h); g.lineTo(x + band * 0.9 + w, 0); g.lineTo(x + w, 0); g.closePath(); g.fill();
+    }
+  });
+  poleTex.wrapS = poleTex.wrapT = THREE.RepeatWrapping; poleTex.repeat.set(1, 2);
+  W.poleTex = poleTex;
+  const pole = new THREE.Group(); pole.position.set(2.06, 1.56, BACK + 0.2); room.add(pole);
+  const chrome = std('#d4d9de', 0.16, 1);
+  mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.74, 32, 1, true), std('#ffffff', 0.35, 0, { map: poleTex }), pole);
+  mesh(new THREE.CylinderGeometry(0.078, 0.078, 0.74, 32, 1, true), new THREE.MeshPhysicalMaterial({ color: '#ffffff', roughness: 0.05, metalness: 0, transparent: true, opacity: 0.18, envMapIntensity: 1.6, depthWrite: false }), pole);
+  mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.05, 32), chrome, pole, 0, 0.395, 0);
+  mesh(new THREE.SphereGeometry(0.07, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), chrome, pole, 0, 0.42, 0);
+  mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.05, 32), chrome, pole, 0, -0.395, 0);
+  mesh(new THREE.SphereGeometry(0.06, 24, 12, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), chrome, pole, 0, -0.42, 0);
+  mesh(new THREE.BoxGeometry(0.03, 0.03, 0.16), chrome, pole, 0, 0.3, -0.1);
+  mesh(new THREE.BoxGeometry(0.03, 0.03, 0.16), chrome, pole, 0, -0.3, -0.1);
+  const shelf = new THREE.Group(); shelf.position.set(-2.13, 1.3, BACK + 0.11); room.add(shelf);
+  mesh(new THREE.BoxGeometry(0.58, 0.03, 0.2), std('#f1ece3', 0.5), shelf).castShadow = true;
+  for (const bx of [-0.22, 0.22]) mesh(new THREE.BoxGeometry(0.02, 0.1, 0.16), brass, shelf, bx, -0.06, -0.01);
+  ['#b8742a', '#4f7fa6', '#5f8f6a', '#d9e6ea'].forEach((c, i) => {
+    const hgt = [0.2, 0.15, 0.24, 0.17][i], rad = [0.045, 0.055, 0.04, 0.05][i];
+    const prof = [[0, 0], [rad, 0], [rad, hgt * 0.7], [rad * 0.45, hgt * 0.86], [rad * 0.4, hgt], [0, hgt]].map(([a, b]) => new THREE.Vector2(a, b));
+    mesh(new THREE.LatheGeometry(prof, 24), std(c, 0.12, 0, { transparent: true, opacity: 0.82, envMapIntensity: 1.4 }), shelf, -0.19 + i * 0.125, 0.015, 0).castShadow = true;
+    mesh(new THREE.CylinderGeometry(rad * 0.45, rad * 0.45, 0.03, 16), std('#2a2a2a', 0.4), shelf, -0.19 + i * 0.125, 0.015 + hgt + 0.012, 0);
+  });
+}
+
+/* ───── Luces ───── */
+const LIGHTS = {
+  base:     { key: 100, keyC: '#ffefd9', rim: 1.3, rimC: '#b9d5ff', fill: 0.22, fillC: '#ffd2a8', hemi: 0.3,  spot: 0,  sconce: 3.0 },
+  corte:    { key: 115, keyC: '#fff1df', rim: 1.8, rimC: '#c3dcff', fill: 0.3,  fillC: '#ffd8b4', hemi: 0.28, spot: 0,  sconce: 3.0 },
+  barba:    { key: 108, keyC: '#fff5e8', rim: 2.2, rimC: '#d4e6ff', fill: 0.22, fillC: '#ffe2c4', hemi: 0.26, spot: 0,  sconce: 2.4 },
+  lavado:   { key: 92,  keyC: '#eef8ff', rim: 2.8, rimC: '#7fe3ff', fill: 0.4,  fillC: '#bfefff', hemi: 0.34, spot: 0,  sconce: 2.0 },
+  tinte:    { key: 108, keyC: '#ffe6cf', rim: 1.8, rimC: '#ffb38a', fill: 0.5,  fillC: '#ffb0c8', hemi: 0.28, spot: 0,  sconce: 3.4 },
+  completo: { key: 74,  keyC: '#fff0dc', rim: 2.4, rimC: '#ffd27a', fill: 0.2,  fillC: '#ffd2a8', hemi: 0.24, spot: 46, sconce: 4.2 }
+};
+function buildLights() {
+  W.hemi = new THREE.HemisphereLight('#c9ddeb', '#2a2420', 0.3); scene.add(W.hemi);
+  W.key = new THREE.SpotLight('#fff0dc', 100, 0, 0.5, 0.85, 2); W.key.position.set(2.3, 4.7, 3.8); W.key.target.position.set(0, 0.95, -0.1);
+  W.key.castShadow = true;
+  const sc = W.key.shadow; sc.mapSize.set(mqPhone.matches ? 1024 : 2048, mqPhone.matches ? 1024 : 2048);
+  sc.camera.near = 1; sc.camera.far = 16; sc.bias = -0.0003; sc.normalBias = 0.025; sc.radius = 3;
+  scene.add(W.key, W.key.target);
+  W.rim = new THREE.DirectionalLight('#b9d5ff', 1.5); W.rim.position.set(-2.4, 3.4, -2.0); W.rim.target.position.set(0, 1, 0); scene.add(W.rim, W.rim.target);
+  W.fill = new THREE.DirectionalLight('#ffd2a8', 0.35); W.fill.position.set(-3, 1.4, 3.2); scene.add(W.fill);
+  W.spot = new THREE.SpotLight('#ffd27a', 0, 10, 0.46, 0.7, 1.4); W.spot.position.set(0.15, 4.4, 2.2); W.spot.target.position.set(0, 1.1, 0);
+  scene.add(W.spot, W.spot.target);
+  W.lc = { a: new THREE.Color(), b: new THREE.Color() };
+}
+function applyLights(a, b, t) {
+  const c = W.lc;
+  W.key.intensity = lerp(a.key, b.key, t); W.key.color.copy(c.a.set(a.keyC)).lerp(c.b.set(b.keyC), t);
+  W.rim.intensity = lerp(a.rim, b.rim, t); W.rim.color.copy(c.a.set(a.rimC)).lerp(c.b.set(b.rimC), t);
+  W.fill.intensity = lerp(a.fill, b.fill, t); W.fill.color.copy(c.a.set(a.fillC)).lerp(c.b.set(b.fillC), t);
+  W.hemi.intensity = lerp(a.hemi, b.hemi, t);
+  W.spot.intensity = lerp(a.spot, b.spot, t);
+  const sc = lerp(a.sconce, b.sconce, t);
+  W.sconces.forEach((s) => { s.light.intensity = sc; s.globe.material.emissiveIntensity = 0.7 * sc; });
+}
+
+/* ───── Personajes ───── */
+function loadGLB(loader, url, onProgress) { return new Promise((resolve, reject) => loader.load(url, resolve, onProgress, reject)); }
+function normalizeCharacter(gltf, cfg, root) {
+  const model = gltf.scene;
+  model.rotation.y = cfg.giroY || 0;
+  model.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(model, true);
+  const size = box.getSize(new THREE.Vector3()), center = box.getCenter(new THREE.Vector3());
+  model.position.x -= center.x; model.position.y -= box.min.y; model.position.z -= center.z;
+  const holder = new THREE.Group(); holder.scale.setScalar(cfg.altura / size.y); holder.add(model);
+  model.traverse((o) => {
+    if (o.isMesh) {
+      o.castShadow = true; o.receiveShadow = true;
+      (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => { if (m && 'envMapIntensity' in m) m.envMapIntensity = 0.75; });
+    }
+  });
+  root.add(holder);
+  root.updateMatrixWorld(true);
+  return holder;
+}
+// Mide la cabeza y la barba del cliente. Con los modelos de la carpeta modelos/ usa sus piezas con nombre
+// (cabeza_piel, cabeza_pelo, cabeza_barba); con cualquier otro modelo recorre sus vértices.
+function analyzeClient(root, H) {
+  root.updateMatrixWorld(true);
+  const inv = root.matrixWorld.clone().invert(), rel = new THREE.Matrix4();
+  const boxOf = (re) => {
+    const b = new THREE.Box3();
+    root.traverse((o) => {
+      if (!o.isMesh || !re.test(o.name)) return;
+      if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+      b.union(o.geometry.boundingBox.clone().applyMatrix4(rel.multiplyMatrices(inv, o.matrixWorld)));
+    });
+    return b;
+  };
+  const skin = boxOf(/^cabeza_piel/), hair = boxOf(/^cabeza_pelo/), beard = boxOf(/^cabeza_barba/);
+  if (!skin.isEmpty() && !hair.isEmpty() && !beard.isEmpty()) {
+    const half = (skin.max.y - skin.min.y) / 2;
+    A.H = H;
+    A.top = Math.max(hair.max.y, skin.max.y);
+    A.hy = skin.min.y + half;
+    A.hx = (skin.min.x + skin.max.x) / 2;
+    A.hz = skin.min.z + half * 0.92;
+    A.r = THREE.MathUtils.clamp(Math.max(half * 1.25, (A.top - A.hy) / 1.2), 0.08 * H, 0.2 * H);
+    A.front = skin.max.z;
+    A.beardFront = beard.max.z - 0.012;
+    A.beardTop = A.hy - A.r * 0.15;
+    A.beardBottom = beard.min.y + 0.02;
+    A.neck = beard.min.y - 0.03;
+    return;
+  }
+  const head = { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity, maxY: -Infinity, n: 0 };
+  let beardFront = -Infinity, beardN = 0;
+  const v = new THREE.Vector3();
+  root.traverse((o) => {
+    if (!o.isMesh || !o.geometry.attributes.position) return;
+    const p = o.geometry.attributes.position, step = Math.max(1, Math.floor(p.count / 80000));
+    for (let i = 0; i < p.count; i += step) {
+      v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld);
+      if (v.y > 0.78 * H) {
+        head.n++; if (v.x < head.minX) head.minX = v.x; if (v.x > head.maxX) head.maxX = v.x;
+        if (v.z < head.minZ) head.minZ = v.z; if (v.z > head.maxZ) head.maxZ = v.z; if (v.y > head.maxY) head.maxY = v.y;
+      }
+      if (v.y > 0.6 * H && v.y < 0.76 * H && Math.abs(v.x) < 0.09 * H) { beardN++; if (v.z > beardFront) beardFront = v.z; }
+    }
+  });
+  const ok = head.n > 20;
+  A.H = H;
+  A.top = ok ? head.maxY : H;
+  A.r = ok ? THREE.MathUtils.clamp(Math.max(head.maxX - head.minX, head.maxZ - head.minZ) / 2, 0.08 * H, 0.2 * H) : 0.13 * H;
+  A.hx = ok ? (head.minX + head.maxX) / 2 : 0;
+  A.hz = ok ? (head.minZ + head.maxZ) / 2 : 0.02;
+  A.hy = A.top - A.r * 1.02;
+  A.front = ok ? head.maxZ : A.hz + A.r;
+  A.beardFront = beardN > 20 ? beardFront : A.hz + A.r * 0.8;
+  A.beardTop = A.hy - A.r * 0.15;
+  A.beardBottom = 0.62 * H;
+  A.neck = 0.585 * H;
+}
+
+/* ───── Tinte: recolorea solo los tonos castaños por encima del cuello ───── */
+const DYE = {
+  uDyeOn: { value: 0 }, uDyeWipe: { value: 9 }, uDyeMin: { value: 0 }, uDyeFeather: { value: 0.045 },
+  uDyeOff: { value: 0 }, uDyeScale: { value: 1 }, uDyeTarget: { value: new THREE.Vector3() }
+};
+function setDyeTarget(hex) { const s = new THREE.Color(hex).convertLinearToSRGB(); DYE.uDyeTarget.value.set(s.r, s.g, s.b); }
+const DYE_GLSL = `
+varying float vDyeY;
+uniform float uDyeOn, uDyeWipe, uDyeMin, uDyeFeather, uDyeOff, uDyeScale;
+uniform vec3 uDyeTarget;
+vec3 dyeRgb2hsv(vec3 c){ vec4 K=vec4(0.,-1./3.,2./3.,-1.); vec4 p=mix(vec4(c.bg,K.wz),vec4(c.gb,K.xy),step(c.b,c.g)); vec4 q=mix(vec4(p.xyw,c.r),vec4(c.r,p.yzx),step(p.x,c.r)); float d=q.x-min(q.w,q.y); float e=1.0e-10; return vec3(abs(q.z+(q.w-q.y)/(6.*d+e)),d/(q.x+e),q.x); }
+vec3 dyeHsv2rgb(vec3 c){ vec4 K=vec4(1.,2./3.,1./3.,3.); vec3 p=abs(fract(c.xxx+K.xyz)*6.-K.www); return c.z*mix(K.xxx,clamp(p-K.xxx,0.,1.),c.y); }
+`;
+function patchDye(material) {
+  material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, DYE);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying float vDyeY;')
+      .replace('#include <project_vertex>', '#include <project_vertex>\nvDyeY = (modelMatrix * vec4(transformed, 1.0)).y;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', '#include <common>\n' + DYE_GLSL)
+      .replace('#include <map_fragment>', `#include <map_fragment>
+      if (uDyeOn > 0.5) {
+        vec3 sc = pow(max(diffuseColor.rgb, vec3(0.0)), vec3(1.0 / 2.2));
+        vec3 hsv = dyeRgb2hsv(sc);
+        float hueM = 1.0 - smoothstep(0.035, 0.075, abs(hsv.x - 0.075));
+        float satM = smoothstep(0.16, 0.3, hsv.y);
+        float valM = smoothstep(0.05, 0.12, hsv.z) * (1.0 - smoothstep(0.86, 0.98, hsv.z));
+        float ly = (vDyeY - uDyeOff) / uDyeScale;
+        float regM = smoothstep(uDyeMin - 0.03, uDyeMin + 0.03, ly);
+        float wipeM = smoothstep(uDyeWipe - uDyeFeather, uDyeWipe + uDyeFeather, ly);
+        float m = hueM * satM * valM * regM * wipeM;
+        vec3 th = dyeRgb2hsv(uDyeTarget);
+        vec3 nh = vec3(th.x, mix(hsv.y, th.y, 0.85), clamp(hsv.z * (0.7 + 0.65 * th.z), 0.0, 1.0));
+        diffuseColor.rgb = mix(diffuseColor.rgb, pow(dyeHsv2rgb(nh), vec3(2.2)), m);
+      }`);
+  };
+  material.customProgramCacheKey = () => 'tinte-v1';
+  material.needsUpdate = true;
+}
+
+/* ───── Utensilios (geometría procedural) ───── */
+const MAT = {};
+function makeMats() {
+  MAT.gold = std('#d9ab55', 0.22, 1);
+  MAT.steel = std('#dfe4e8', 0.14, 1);
+  MAT.black = std('#18181a', 0.28, 0.1);
+  MAT.ivory = std('#efe5cf', 0.38);
+  MAT.tortoise = std('#6e3b1f', 0.32, 0.05);
+  MAT.bristle = std('#d6c4a0', 0.95);
+  MAT.foam = std('#ffffff', 0.9, 0, { emissive: '#ffffff', emissiveIntensity: 0.08 });
+  MAT.hair = std('#4d3220', 0.9);
+  MAT.dye = std(CONFIG.colorTinte, 0.45);
+  MAT.spray = std('#8fd0ee', 0.1, 0, { transparent: true, opacity: 0.62, envMapIntensity: 1.6 });
+  MAT.bubble = new THREE.MeshPhysicalMaterial({ color: '#ffffff', roughness: 0.03, metalness: 0, transparent: true, opacity: 0.24, iridescence: 1, iridescenceIOR: 1.35, iridescenceThicknessRange: [180, 560], envMapIntensity: 2.4, depthWrite: false });
+  const star = canvasTex(128, 128, (g, w, h) => {
+    const gr = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.18, 'rgba(255,240,200,0.75)'); gr.addColorStop(1, 'rgba(255,220,150,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    g.fillStyle = 'rgba(255,255,255,0.95)';
+    g.beginPath(); g.moveTo(w / 2, 4); g.lineTo(w / 2 + 5, h / 2 - 5); g.lineTo(w - 4, h / 2); g.lineTo(w / 2 + 5, h / 2 + 5); g.lineTo(w / 2, h - 4); g.lineTo(w / 2 - 5, h / 2 + 5); g.lineTo(4, h / 2); g.lineTo(w / 2 - 5, h / 2 - 5); g.closePath(); g.fill();
+  });
+  MAT.spark = new THREE.MeshBasicMaterial({ map: star, color: '#ffe9b8', transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false });
+}
+const extrude = (shape, depth, bevel = 0.0015) => { const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 2, curveSegments: 16 }); g.translate(0, 0, -depth / 2); return g; };
+function roundRect(w, h, r) { const s = new THREE.Shape(); s.moveTo(-w / 2 + r, -h / 2); s.lineTo(w / 2 - r, -h / 2); s.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r); s.lineTo(w / 2, h / 2 - r); s.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2); s.lineTo(-w / 2 + r, h / 2); s.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r); s.lineTo(-w / 2, -h / 2 + r); s.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2); return s; }
+function makeScissors() {
+  const g = new THREE.Group();
+  const blade = new THREE.Shape(); blade.moveTo(0, -0.011); blade.quadraticCurveTo(0.1, -0.015, 0.19, 0.0); blade.quadraticCurveTo(0.1, 0.005, 0, 0.011); blade.lineTo(0, -0.011);
+  const bladeGeo = extrude(blade, 0.005);
+  const ringGeo = new THREE.TorusGeometry(0.032, 0.0075, 12, 40);
+  const shankGeo = new THREE.BoxGeometry(0.075, 0.012, 0.007);
+  const arms = [1, -1].map((sgn) => {
+    const arm = new THREE.Group();
+    mesh(bladeGeo, MAT.gold, arm);
+    const sh = mesh(shankGeo, MAT.gold, arm, -0.036, sgn * 0.01, 0); sh.rotation.z = -sgn * 0.38;
+    mesh(ringGeo, MAT.gold, arm, -0.095, sgn * 0.04, 0);
+    arm.position.z = sgn * 0.0045;
+    g.add(arm); return arm;
+  });
+  const pin = mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.022, 16), MAT.steel, g); pin.rotation.x = Math.PI / 2;
+  g.userData.open = (a) => { arms[0].rotation.z = a / 2; arms[1].rotation.z = -a / 2; };
+  g.userData.open(0.4);
+  return g;
+}
+function makeRazor() {
+  const g = new THREE.Group();
+  const s = new THREE.Shape(); s.moveTo(0, -0.004); s.lineTo(0.13, -0.006); s.quadraticCurveTo(0.148, 0.008, 0.138, 0.028); s.lineTo(0.012, 0.03); s.quadraticCurveTo(0, 0.02, 0, -0.004);
+  mesh(extrude(s, 0.003, 0.001), MAT.steel, g, 0, -0.012, 0);
+  const handle = mesh(extrude(roundRect(0.16, 0.024, 0.011), 0.011), MAT.black, g, -0.085, 0.004, 0);
+  handle.rotation.z = 0.12;
+  const pin = mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.02, 12), MAT.gold, g, -0.004, 0.0, 0); pin.rotation.x = Math.PI / 2;
+  return g;
+}
+function makeComb() {
+  const parts = [new THREE.BoxGeometry(0.2, 0.024, 0.007)];
+  for (let i = 0; i < 24; i++) { const t = new THREE.BoxGeometry(0.0035, 0.038, 0.005); t.translate(-0.092 + i * 0.008, -0.03, 0); parts.push(t); }
+  return new THREE.Mesh(mergeGeometries(parts), MAT.tortoise);
+}
+function makeBrush() {
+  const g = new THREE.Group();
+  const hp = [[0, 0], [0.02, 0], [0.023, 0.012], [0.017, 0.038], [0.021, 0.058], [0.025, 0.064], [0, 0.064]].map(([a, b]) => new THREE.Vector2(a, b));
+  mesh(new THREE.LatheGeometry(hp, 28), MAT.ivory, g);
+  const bp = [[0, 0.064], [0.021, 0.064], [0.029, 0.09], [0.025, 0.112], [0.013, 0.123], [0, 0.126]].map(([a, b]) => new THREE.Vector2(a, b));
+  mesh(new THREE.LatheGeometry(bp, 28), MAT.bristle, g);
+  const foam = mesh(new THREE.SphereGeometry(0.026, 20, 14), MAT.foam, g, 0, 0.124, 0); foam.scale.set(1, 0.7, 1);
+  return g;
+}
+function makeSpray() {
+  const g = new THREE.Group();
+  const p = [[0, 0], [0.032, 0], [0.034, 0.01], [0.034, 0.09], [0.026, 0.112], [0.012, 0.122], [0.012, 0.136], [0, 0.136]].map(([a, b]) => new THREE.Vector2(a, b));
+  mesh(new THREE.LatheGeometry(p, 28), MAT.spray, g);
+  mesh(new THREE.BoxGeometry(0.03, 0.03, 0.05), MAT.black, g, 0, 0.15, 0.008);
+  mesh(new THREE.BoxGeometry(0.012, 0.012, 0.028), MAT.black, g, 0, 0.155, 0.045);
+  const trig = mesh(new THREE.BoxGeometry(0.01, 0.05, 0.012), MAT.black, g, 0, 0.115, 0.03); trig.rotation.x = 0.35;
+  return g;
+}
+function makeBowl() {
+  const g = new THREE.Group();
+  const p = [[0, 0], [0.045, 0], [0.068, 0.036], [0.072, 0.044], [0.066, 0.045], [0.044, 0.01], [0, 0.01]].map(([a, b]) => new THREE.Vector2(a, b));
+  mesh(new THREE.LatheGeometry(p, 36), std('#141619', 0.22, 0.1, { side: THREE.DoubleSide }), g);
+  mesh(new THREE.CylinderGeometry(0.062, 0.046, 0.024, 36), MAT.dye, g, 0, 0.024, 0);
+  return g;
+}
+function makeTintBrush() {
+  const g = new THREE.Group();
+  mesh(new THREE.BoxGeometry(0.17, 0.012, 0.006), MAT.black, g, -0.085, 0, 0);
+  mesh(new THREE.BoxGeometry(0.02, 0.016, 0.01), MAT.steel, g, 0.01, 0, 0);
+  mesh(new THREE.BoxGeometry(0.04, 0.018, 0.009), std('#2a2522', 0.8), g, 0.04, 0, 0);
+  mesh(new THREE.BoxGeometry(0.018, 0.019, 0.0095), MAT.dye, g, 0.058, 0, 0);
+  return g;
+}
+function instanced(geo, mat, count) { const im = new THREE.InstancedMesh(geo, mat, count); im.frustumCulled = false; im.instanceMatrix.setUsage(THREE.DynamicDrawUsage); return im; }
+function setInst(im, i, x, y, z, rx, ry, rz, s) {
+  _q.setFromEuler(_e.set(rx, ry, rz)); _s.set(s, s, s); _v.set(x, y, z);
+  im.setMatrixAt(i, _m.compose(_v, _q, _s));
+}
+function buildFX() {
+  makeMats();
+  const C = W.clientFX, R = rng(1931);
+  const fx = W.fx = {};
+  fx.scissors = makeScissors(); C.add(fx.scissors);
+  fx.clips = instanced(new THREE.BoxGeometry(0.0045, 0.032, 0.0045), MAT.hair, 120); C.add(fx.clips);
+  fx.clipData = Array.from({ length: 120 }, () => ({ a: R() * Math.PI * 2, h: R(), s0: 0.48 + R() * 0.3, d: 0.16 + R() * 0.06, land: 0.14 + R() * 0.36, rx: R() * 6, ry: R() * 6, rz: R() * 6, sw: R() * 6 }));
+  fx.brush = makeBrush(); C.add(fx.brush);
+  fx.razor = makeRazor(); C.add(fx.razor);
+  fx.foam = instanced(new THREE.SphereGeometry(1, 18, 12), MAT.foam, 22); C.add(fx.foam);
+  fx.foamData = Array.from({ length: 22 }, (_, i) => ({ col: i % 3, yn: 0.08 + R() * 0.84, jx: (R() - 0.5) * 0.18, r: 0.024 + R() * 0.022, o: R() }));
+  fx.lather = instanced(new THREE.SphereGeometry(1, 18, 12), MAT.foam, 36); C.add(fx.lather);
+  fx.latherData = Array.from({ length: 36 }, (_, i) => { const t = (i + 0.5) / 36; return { el: Math.asin(lerp(0.22, 0.98, t)), az: i * 2.39996, r: 0.042 + R() * 0.035, o: R() }; });
+  fx.bubbles = Array.from({ length: 22 }, () => { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 18), MAT.bubble); m.renderOrder = 2; C.add(m); return m; });
+  fx.bubbleData = fx.bubbles.map(() => ({ src: Math.floor(R() * 36), az: R() * Math.PI * 2, out: 0.1 + R() * 0.34, up: 0.06 + R() * 0.44, r: 0.018 + R() * 0.045, s0: 0.38 + R() * 0.3 }));
+  fx.bowl = makeBowl(); C.add(fx.bowl);
+  fx.tint = makeTintBrush(); C.add(fx.tint);
+  fx.sparks = Array.from({ length: 14 }, () => { const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), MAT.spark); m.renderOrder = 3; scene.add(m); return m; });
+  fx.sparkData = fx.sparks.map(() => ({ x: R(), y: R(), z: R(), o: R(), s: 0.05 + R() * 0.07 }));
+  fx.halo = [makeScissors(), makeComb(), makeRazor(), makeBrush(), makeSpray(), makeBowl()];
+  fx.halo.forEach((o) => { o.scale.setScalar(1.55); W.worldFX.add(o); });
+  W.allFX = [fx.scissors, fx.clips, fx.brush, fx.razor, fx.foam, fx.lather, ...fx.bubbles, fx.bowl, fx.tint, ...fx.sparks, ...fx.halo];
+  W.allFX.forEach((o) => { o.traverse((c) => { if (c.isMesh) c.castShadow = false; }); });
+}
+
+/* ═════════════════════════════════════════════════════════════
+   5. Coreografía: cada servicio es una función pura de p (0 = inicio, 1 = servicio).
+   La vuelta reproduce la misma función hacia atrás: no hay saltos entre ida y vuelta.
+   ═════════════════════════════════════════════════════════════ */
+function layout() {
+  const a = camera.aspect, k = clamp01((a - 0.5) / (1.35 - 0.5));
+  return {
+    k, aspect: a,
+    barber: { x: lerp(-0.4, -0.66, k), z: lerp(-0.42, -0.12, k), ry: lerp(0.34, 0.22, k) },
+    client: { x: lerp(0.32, 0.6, k), z: lerp(0.06, 0.0, k), ry: lerp(-0.2, -0.14, k) },
+    phone: mqPhone.matches, short: mqShortLandscape.matches
+  };
+}
+function cpt(pose, lx, ly, lz) {
+  const s = Math.sin(pose.ry), c = Math.cos(pose.ry);
+  return new THREE.Vector3(pose.x + lx * c + lz * s, ly, pose.z - lx * s + lz * c);
+}
+// Encuadre: coloca [bottom, top] del sujeto entre [sTop, sBottom] de la pantalla y su centro en sx
+function frameCam({ top, bottom, sTop, sBottom, cx, cz, az, el, minW, sx = 0.5 }) {
+  const tanH = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
+  let H = (top - bottom) / (sBottom - sTop);
+  if (minW && H * camera.aspect < minW) H = minW / camera.aspect;
+  const shift = (sx - 0.5) * H * camera.aspect;
+  return { tx: cx - Math.cos(az) * shift, ty: top - (0.5 - sTop) * H, tz: cz + Math.sin(az) * shift, az, el, dist: (H / 2) / tanH };
+}
+function baseCam(L) {
+  const top = Math.max(CONFIG.modelos.peluquero.altura, CONFIG.modelos.cliente.altura);
+  return frameCam({ top, bottom: -0.02, sTop: L.short ? 0.3 : 0.14, sBottom: L.short ? 1.02 : 0.95, cx: (L.barber.x + L.client.x) / 2, cz: 0, az: 0, el: 0.05, minW: lerp(1.75, 3.4, L.k) });
+}
+function headCam(L, pose, { az, el, up = 0.1, down = 1.2, minW = 1.0, sx = 0.5 }) {
+  const c = cpt(pose, A.hx, A.hy, A.hz);
+  const wide = !L.phone && !L.short;
+  return frameCam({ top: A.top + up, bottom: A.hy - A.r * down, sTop: wide ? 0.1 : 0.12, sBottom: wide ? 0.54 : 0.42, cx: c.x, cz: c.z, az, el, minW, sx: wide ? sx : 0.5 });
+}
+
+const SVC = {
+  corte: {
+    move: [0, 0.56],
+    client: () => ({ x: 0.16, z: 0.12, ry: -0.22 }),
+    barber: (L) => ({ x: L.phone ? -0.5 : -0.98, z: -0.42, ry: 0.92 }),
+    cam: (L) => headCam(L, SVC.corte.client(L), { az: 0.44, el: 0.08, up: 0.14, down: 1.1, minW: 1.05, sx: 0.64 }),
+    fx(p) {
+      const f = W.fx, sc = f.scissors;
+      const arrive = easeOut(seg(p, 0.26, 0.48)), pop = easeBack(seg(p, 0.26, 0.42));
+      if (pop > 0) {
+        sc.visible = true;
+        const snip = seg(p, 0.46, 0.94);
+        const phi = lerp(1.3, 0.7, easeIO(snip));
+        const rr = A.r + 0.06;
+        sc.position.set(A.hx + Math.sin(phi) * rr + (1 - arrive) * 0.55, A.hy + A.r * 0.38 + (1 - arrive) * 0.3 + Math.sin(snip * Math.PI * 5) * 0.008, A.hz + Math.cos(phi) * rr + (1 - arrive) * 0.25);
+        sc.rotation.set(0.15, phi + Math.PI * 0.5 + 0.35, 0.55 - (1 - arrive) * 1.4);
+        sc.scale.setScalar(pop * 1.25);
+        sc.userData.open(0.06 + 0.36 * Math.abs(Math.cos(Math.PI * 5 * snip)));
+      }
+      clippings(p);
+    }
+  },
+  barba: {
+    move: [0, 0.5],
+    client: () => ({ x: 0.06, z: 0.1, ry: 0.5 }),
+    barber: (L) => ({ x: L.phone ? 0.62 : 0.86, z: -0.36, ry: -1.05 }),
+    cam: (L) => headCam(L, SVC.barba.client(L), { az: -0.32, el: 0.02, up: 0.06, down: 2.0, minW: 1.0, sx: 0.36 }),
+    fx(p) {
+      const f = W.fx;
+      const bIn = easeBack(seg(p, 0.1, 0.26)), bOut = 1 - seg(p, 0.5, 0.58);
+      if (bIn * bOut > 0) {
+        const u = seg(p, 0.28, 0.5);
+        const pt = beardPt(lerp(-0.9, -0.1, u), lerp(0.85, 0.2, u));
+        const pull = 0.05 * Math.abs(Math.sin(u * Math.PI * 3)) + (1 - seg(p, 0.1, 0.28)) * 0.35;
+        f.brush.visible = true;
+        f.brush.position.set(pt.x - pull * 0.6, pt.y, pt.z + 0.02 + pull);
+        f.brush.rotation.set(-Math.PI / 2 + 0.25, 0, -0.55);
+        f.brush.scale.setScalar(1.6 * bIn * bOut);
+      }
+      let any = false;
+      const razY = [0, 1, 2].map((j) => { const u = seg(p, 0.6 + 0.1 * j, 0.68 + 0.1 * j); return 0.97 - 0.94 * easeIO(u); });
+      f.foamData.forEach((d, i) => {
+        const grow = easeBack(seg(p, 0.29 + 0.17 * d.o, 0.36 + 0.17 * d.o));
+        const clear = smooth(d.yn + 0.07, d.yn - 0.03, razY[d.col]);
+        const s = d.r * grow * (1 - clear);
+        const pt = beardPt([-0.85, -0.5, -0.15][d.col] + d.jx, d.yn);
+        setInst(f.foam, i, pt.x, pt.y, pt.z + 0.008, 0, 0, 0, s); if (s > 0) any = true;
+      });
+      f.foam.visible = any; f.foam.instanceMatrix.needsUpdate = true;
+      const rIn = easeBack(seg(p, 0.5, 0.6));
+      if (rIn > 0) {
+        f.razor.visible = true;
+        let xn = -0.85, yn = 0.97, lift = 0.0;
+        for (let j = 0; j < 3; j++) {
+          const a = 0.6 + 0.1 * j;
+          if (p >= a) { xn = [-0.85, -0.5, -0.15][j]; yn = razY[j]; lift = Math.sin(Math.PI * seg(p, a + 0.08, a + 0.1)) * 0.05; }
+        }
+        const rest = easeIO(seg(p, 0.9, 1));
+        if (p < 0.6) lift = (1 - seg(p, 0.5, 0.6)) * 0.3;
+        const pt = beardPt(lerp(xn, -1.0, rest), lerp(yn, 0.72, rest));
+        // hoja apoyada en la barba (canto hacia abajo), mango saliendo hacia la cámara
+        f.razor.position.set(pt.x - lift * 0.5 - 0.02, pt.y + 0.012, pt.z + 0.035 + lift);
+        f.razor.rotation.set(0, -0.82, lerp(-0.35, 0.7, rest));
+        f.razor.scale.setScalar(1.5 * rIn);
+      }
+      const tw = seg(p, 0.86, 1);
+      if (tw > 0) f.sparks.slice(0, 5).forEach((m, i) => {
+        const d = f.sparkData[i], pt = beardPt(lerp(-0.95, 0.1, d.x), lerp(0.2, 0.95, d.y));
+        const w = cpt(SVC.barba.client(), pt.x, pt.y, pt.z + 0.03);
+        const s = easeBack(clamp01(tw * 1.4 - d.o * 0.3)) * (1 - 0.55 * tw) * (d.s + 0.03);
+        m.visible = s > 0; m.position.copy(w); m.quaternion.copy(camera.quaternion); m.scale.setScalar(Math.max(s, 0.0001));
+      });
+    }
+  },
+  lavado: {
+    move: [0, 0.52],
+    client: () => ({ x: 0.12, z: 0.12, ry: -0.08 }),
+    barber: (L) => ({ x: L.phone ? -0.52 : -0.72, z: -0.32, ry: 0.78 }),
+    cam: (L) => headCam(L, SVC.lavado.client(L), { az: 0.16, el: 0.22, up: 0.5, down: 1.1, minW: 1.2, sx: 0.62 }),
+    fx(p) {
+      const f = W.fx;
+      let any = false;
+      const crown = (d) => { const rr = A.r; return [A.hx + Math.cos(d.el) * Math.sin(d.az) * rr, A.hy + Math.sin(d.el) * rr * 1.04 + 0.01, A.hz + Math.cos(d.el) * Math.cos(d.az) * rr]; };
+      f.latherData.forEach((d, i) => {
+        const g = easeBack(seg(p, 0.18 + 0.3 * d.o, 0.3 + 0.3 * d.o));
+        const [x, y, z] = crown(d);
+        setInst(f.lather, i, x, y, z, 0, 0, 0, d.r * g); if (g > 0) any = true;
+      });
+      f.lather.visible = any; f.lather.instanceMatrix.needsUpdate = true;
+      f.bubbles.forEach((m, i) => {
+        const d = f.bubbleData[i];
+        const u = seg(p, d.s0, Math.min(1, d.s0 + 0.5));
+        if (u <= 0) return;
+        const [sx, sy, sz] = crown(f.latherData[d.src]);
+        const e = easeOut(u);
+        const ex = A.hx + Math.sin(d.az) * (A.r + d.out), ez = A.hz + Math.cos(d.az) * (A.r + d.out) * 0.8, ey = A.top + d.up;
+        m.visible = true;
+        m.position.set(lerp(sx, ex, e), lerp(sy, ey, e) + Math.sin(u * Math.PI) * 0.04, lerp(sz, ez, e));
+        m.scale.setScalar(d.r * easeBack(seg(u, 0, 0.35)));
+      });
+    }
+  },
+  tinte: {
+    move: [0, 0.5],
+    client: () => ({ x: 0.1, z: 0.12, ry: 0.1 }),
+    barber: (L) => ({ x: L.phone ? 0.6 : 0.84, z: -0.32, ry: -0.92 }),
+    cam: (L) => headCam(L, SVC.tinte.client(L), { az: -0.16, el: 0.06, up: 0.08, down: 2.1, minW: 1.15, sx: 0.38 }),
+    fx(p) {
+      const f = W.fx;
+      const bowlIn = easeBack(seg(p, 0.12, 0.28));
+      const bowlPos = new THREE.Vector3(A.hx + A.r * 2.05, A.hy - A.r * 1.45, A.hz + 0.12);
+      if (bowlIn > 0) {
+        f.bowl.visible = true;
+        f.bowl.position.set(bowlPos.x + (1 - bowlIn) * 0.25, bowlPos.y - (1 - bowlIn) * 0.2, bowlPos.z);
+        f.bowl.rotation.set(0.35, 0, -0.18);
+        f.bowl.scale.setScalar(1.7 * bowlIn);
+      }
+      const tIn = easeBack(seg(p, 0.2, 0.32));
+      const u = seg(p, 0.34, 0.9), rest = easeIO(seg(p, 0.9, 1));
+      if (tIn > 0) {
+        f.tint.visible = true;
+        const yTop = A.top - 0.01, yBot = A.beardBottom + 0.04;
+        const y = lerp(yTop, yBot, easeIO(u));
+        const a = Math.sin(u * Math.PI * 3) * 0.95;
+        let px, pz;
+        if (y > A.hy) { const rr = Math.sqrt(Math.max(A.r * A.r - (y - A.hy) * (y - A.hy), 0)) * 1.06 + 0.025; px = A.hx + Math.sin(a) * rr; pz = A.hz + Math.cos(a) * rr; }
+        else { const fr = beardPt(Math.sin(a) * 0.8, clamp01((y - A.beardBottom) / (A.beardTop - A.beardBottom))); px = fr.x; pz = fr.z + 0.03; }
+        const k0 = seg(p, 0.2, 0.34);
+        const bx = lerp(bowlPos.x, px, k0), by = lerp(bowlPos.y + 0.06, y, k0), bz = lerp(bowlPos.z, pz, k0);
+        f.tint.position.set(lerp(bx, bowlPos.x - 0.02, rest), lerp(by, bowlPos.y + 0.05, rest), lerp(bz, bowlPos.z, rest));
+        f.tint.rotation.set(0.2, lerp(-Math.PI / 2 - a * 0.6, -0.4, rest), lerp(0.9, 0.25, rest));
+        f.tint.scale.setScalar(1.5 * tIn);
+        DYE.uDyeWipe.value = y + 0.03;
+      }
+      if (p >= 0.9) DYE.uDyeWipe.value = lerp(A.beardBottom + 0.07, A.neck - 0.08, seg(p, 0.9, 0.98));
+      DYE.uDyeOn.value = p > 0.33 ? 1 : 0;
+    }
+  },
+  completo: {
+    move: [0, 0.6],
+    client: (L) => ({ x: L.phone ? 0.3 : 0.38, z: 0.18, ry: -0.1 }),
+    barber: (L) => ({ x: L.phone ? -0.36 : -0.5, z: -0.12, ry: 0.22 }),
+    swing: -0.5,
+    cam: (L) => {
+      const b = SVC.completo.barber(L), c = SVC.completo.client(L);
+      return frameCam({ top: 2.08, bottom: 0.3, sTop: 0.12, sBottom: L.phone ? 0.72 : 0.97, cx: (b.x + c.x) / 2, cz: 0.02, az: 0.12, el: -0.02, minW: lerp(2.0, 3.2, L.k) });
+    },
+    fx(p, L) {
+      const f = W.fx;
+      clippings(0.45 + 0.55 * seg(p, 0.18, 0.82));
+      DYE.uDyeOn.value = p > 0.24 ? 1 : 0;
+      DYE.uDyeWipe.value = lerp(A.top + 0.08, A.neck - 0.08, easeIO(seg(p, 0.24, 0.86)));
+      const b = SVC.completo.barber(L), c = SVC.completo.client(L);
+      const cx = (b.x + c.x) / 2, cy = 1.3, cz = -0.5, rx = L.phone ? 0.85 : 1.18, ry = 0.66;
+      f.halo.forEach((o, i) => {
+        const u = easeOut(seg(p, 0.26 + 0.075 * i, 0.6 + 0.075 * i));
+        if (u <= 0) return;
+        const th = lerp(Math.PI * 0.93, Math.PI * 0.07, i / (f.halo.length - 1));
+        const sw = th + (1 - u) * 1.8, rad = lerp(3.0, 1, u);
+        o.visible = true;
+        o.position.set(cx + Math.cos(sw) * rx * rad, cy + Math.sin(sw) * ry * rad - (1 - u) * 0.6, cz + (1 - u) * 1.2);
+        o.rotation.set(0.25, (1 - u) * 3 + (i % 2 ? 0.35 : -0.35), th - Math.PI / 2 + (1 - u) * 4);
+        o.scale.setScalar(1.55 * easeBack(seg(u, 0, 0.5)));
+      });
+      const tw = seg(p, 0.58, 0.95);
+      if (tw > 0) f.sparks.forEach((m, i) => {
+        const d = f.sparkData[i];
+        const ang = lerp(Math.PI * 1.05, -0.05, d.x);
+        const pos = new THREE.Vector3(cx + Math.cos(ang) * rx * (0.75 + d.z * 0.5), cy + Math.sin(ang) * ry * (0.7 + d.y * 0.7) - 0.15, cz + 0.4 + d.z * 0.5);
+        const s = easeBack(clamp01(tw * 1.5 - d.o * 0.5)) * (1 - 0.5 * tw) * (d.s * 1.4 + 0.03);
+        m.visible = s > 0; m.position.copy(pos); m.quaternion.copy(camera.quaternion); m.scale.setScalar(Math.max(s, 0.0001));
+      });
+    }
+  }
+};
+function beardPt(xn, yn) {
+  const y = lerp(A.beardBottom, A.beardTop, yn);
+  const x = A.hx + xn * A.r * 0.78;
+  const z = A.beardFront - Math.pow(Math.abs(xn), 1.6) * A.r * 0.55 - (1 - yn) * A.r * 0.12;
+  return new THREE.Vector3(x, y, z);
+}
+function clippings(p) {
+  const f = W.fx; let any = false;
+  f.clipData.forEach((d, i) => {
+    const t = seg(p, d.s0, d.s0 + d.d);
+    if (t <= 0) { setInst(f.clips, i, 0, -10, 0, 0, 0, 0, 0); return; }
+    any = true;
+    const r0 = A.r * 0.95, y0 = A.hy + A.r * (0.2 + d.h * 0.6);
+    const x0 = A.hx + Math.sin(d.a) * r0, z0 = A.hz + Math.cos(d.a) * r0;
+    const x1 = A.hx + Math.sin(d.a) * (0.18 + d.land), z1 = A.hz * 0.5 + Math.cos(d.a) * (0.12 + d.land);
+    const e = easeOut(t), t4 = Math.pow(t, 4);
+    const x = lerp(x0, x1, e) + Math.sin(t * Math.PI * 2 + d.sw) * 0.02 * (1 - t);
+    const z = lerp(z0, z1, e);
+    const y = lerp(y0, 0.004, easeIn2(t));
+    setInst(f.clips, i, x, y, z, lerp(d.rx + 7 * t, Math.PI / 2, t4), d.ry + 3 * t, lerp(d.rz + 5 * t, d.rz, t4), 1);
+  });
+  f.clips.visible = any; f.clips.instanceMatrix.needsUpdate = true;
+}
+/* ───── Articulaciones: los modelos traen cabeza, brazos, antebrazos y piernas con nombre ───── */
+const JOINTS = ['cabeza', 'brazo_izq', 'brazo_der', 'antebrazo_izq', 'antebrazo_der', 'pierna_izq', 'pierna_der'];
+function findRig(root) {
+  const r = {};
+  JOINTS.forEach((n) => { const o = root.getObjectByName(n); if (o) r[n] = { o, rest: o.quaternion.clone() }; });
+  return Object.keys(r).length ? r : null;
+}
+function poseRig(rig, d) {
+  if (!rig) return;
+  for (const n in rig) {
+    const j = rig[n], a = d[n];
+    j.o.quaternion.copy(j.rest);
+    if (a) j.o.quaternion.multiply(_q.setFromEuler(_e.set(a[0], a[1], a[2])));
+  }
+}
+function addPose(a, b) {
+  const o = { ...a };
+  for (const k in b) o[k] = o[k] ? [o[k][0] + b[k][0], o[k][1] + b[k][1], o[k][2] + b[k][2]] : b[k];
+  return o;
+}
+// paso de caminar: un paso por cada saltito del desplazamiento, piernas y brazos alternos
+function walkPose(m, hops, amp) {
+  const s = m > 0 && m < 1 ? Math.sin(Math.PI * hops * m) : 0, k = Math.abs(s);
+  return {
+    pierna_izq: [amp * s, 0, 0], pierna_der: [-amp * s, 0, 0],
+    brazo_izq: [-0.9 * amp * s, 0, 0], brazo_der: [0.9 * amp * s, 0, 0],
+    antebrazo_izq: [-0.25 * k, 0, 0], antebrazo_der: [-0.25 * k, 0, 0]
+  };
+}
+// el peluquero «dirige» los utensilios: levanta el brazo hacia el cliente y marca el ritmo del servicio
+const GESTO = { corte: [10, 0.16, false], barba: [6, 0.14, false], lavado: [8, 0.12, true], tinte: [6, 0.12, false], completo: [4, 0.1, true] };
+function barberWork(key, p, w) {
+  if (!w) return {};
+  const [beats, amp, both] = GESTO[key] || [6, 0.12, false];
+  const wig = Math.sin(p * Math.PI * beats) * amp * w;
+  return {
+    cabeza: [0.1 * w, 0, 0],
+    brazo_der: [-1.15 * w, 0, -0.12 * w], antebrazo_der: [-0.55 * w + wig, 0, 0],
+    brazo_izq: both ? [-1.0 * w, 0, 0.18 * w] : [-0.3 * w, 0, 0.08 * w], antebrazo_izq: both ? [-0.6 * w - wig, 0, 0] : [-0.45 * w, 0, 0]
+  };
+}
+function placeChar(root, a, b, e, m, hops) {
+  root.position.set(lerp(a.x, b.x, e), 0, lerp(a.z, b.z, e));
+  root.rotation.y = lerp(a.ry, b.ry, e);
+  const live = m > 0 && m < 1;
+  root.position.y = live ? Math.abs(Math.sin(Math.PI * hops * m)) * 0.045 : 0;
+  const sy = live ? 1 + 0.03 * Math.sin(2 * Math.PI * hops * m) : 1;
+  root.scale.set(1 / Math.sqrt(sy), sy, 1 / Math.sqrt(sy));
+}
+function setCam(c) {
+  const ce = Math.cos(c.el);
+  camera.position.set(c.tx + Math.sin(c.az) * ce * c.dist, c.ty + Math.sin(c.el) * c.dist, c.tz + Math.cos(c.az) * ce * c.dist);
+  camera.lookAt(c.tx, c.ty, c.tz);
+}
+function applyScene(key, p) {
+  const L = layout();
+  const def = key && key !== 'base' ? SVC[key] : null;
+  if (!def) p = 0;
+  W.allFX.forEach((o) => { o.visible = false; });
+  DYE.uDyeOn.value = 0; DYE.uDyeWipe.value = 9;
+  const bTo = def ? def.barber(L) : L.barber, cTo = def ? def.client(L) : L.client;
+  const m = def ? seg(p, def.move[0], def.move[1]) : 0, e = easeIO(m);
+  placeChar(W.barber, L.barber, bTo, e, m, 3);
+  placeChar(W.client, L.client, cTo, e, m, 2);
+  if (W.rig) {
+    const work = def ? easeIO(seg(p, def.move[1] * 0.75, Math.min(1, def.move[1] + 0.14))) : 0;
+    poseRig(W.rig.barber, addPose(walkPose(m, 3, 0.26), barberWork(key, p, work)));
+    poseRig(W.rig.client, walkPose(m, 2, 0.32));
+  }
+  const ca = baseCam(L), cb = def ? def.cam(L) : ca, ce = easeIO(p);
+  const cam = { tx: lerp(ca.tx, cb.tx, ce), ty: lerp(ca.ty, cb.ty, ce), tz: lerp(ca.tz, cb.tz, ce), az: lerp(ca.az, cb.az, ce), el: lerp(ca.el, cb.el, ce), dist: lerp(ca.dist, cb.dist, ce) };
+  if (def && def.swing) cam.az += def.swing * Math.sin(Math.PI * ce);
+  setCam(cam);
+  camera.updateMatrixWorld();
+  applyLights(LIGHTS.base, def ? LIGHTS[key] : LIGHTS.base, ce);
+  if (def) def.fx(p, L);
+  DYE.uDyeOff.value = W.client.position.y; DYE.uDyeScale.value = W.client.scale.y; DYE.uDyeMin.value = A.neck;
+  W.poleTex.offset.y = -poleSpin * 0.35;
+}
+
+/* ───── Bucle de render (solo dibuja cuando algo cambia) ───── */
+function render() { renderer.render(scene, camera); }
+function kick() { if (!rafId) rafId = requestAnimationFrame(frame); }
+function requestRender() { needsRender = true; kick(); }
+function committedP() { return S.scene === 'base' ? 0 : 1; }
+function frame(now) {
+  rafId = 0;
+  // lastNow se pone a 0 al ocultar/mostrar la pestaña, así que al volver no hay salto;
+  // en equipos lentos cada fotograma avanza como mucho 0,1 s para que la animación no se eternice
+  const dt = lastNow ? Math.min((now - lastNow) / 1000, 0.1) : 1 / 60;
+  lastNow = now;
+  const an = S.anim;
+  if (an) {
+    an.elapsed += dt;
+    if (an.onTitle && !an.titleDone && an.elapsed >= an.titleAt) { an.titleDone = true; an.onTitle(); }
+    const t = an.dur > 0 ? Math.min(1, an.elapsed / an.dur) : 1;
+    poleSpin += dt;
+    applyScene(an.key, an.from + (an.to - an.from) * t);
+    render();
+    if (t >= 1) { finishAnim(); return; }
+    kick();
+    return;
+  }
+  lastNow = 0;
+  if (needsRender && W.ready) { needsRender = false; applyScene(S.scene, committedP()); render(); }
+}
+function runAnim(key, from, to, dur, tok, onTitle) {
+  return new Promise((resolve) => {
+    const d = mqReduce.matches ? 0 : dur;
+    S.anim = { key, from, to, dur: d, elapsed: 0, tok, onTitle, titleAt: Math.min(d * 0.12, 0.9), titleDone: false, resolve };
+    if (d === 0) { if (onTitle) onTitle(); S.anim.titleDone = true; }
+    lastNow = 0;
+    kick();
+  });
+}
+function finishAnim() {
+  const a = S.anim; S.anim = null; lastNow = 0;
+  if (a.onTitle && !a.titleDone) a.onTitle();
+  a.resolve(a.tok === S.token);
+}
+document.addEventListener('visibilitychange', () => { lastNow = 0; if (!document.hidden) kick(); });
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!renderer || !w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  if (S.chosen && controller.classList.contains('collapsed')) { placeChosen(S.chosen, true); showCloud(S.chosen, true); }
+  if (W.ready) requestRender(); else render();
+}
+
+/* ───── Carga de los modelos ───── */
+async function loadModels() {
+  S.playback = 'loading'; S.locked = true;
+  controller.classList.add('loading');
+  setControls('off', false);
+  labelEl.textContent = 'Cargando…';
+  say('Cargando la barbería en 3D…');
+  if (location.protocol === 'file:') {
+    S.playback = 'error';
+    labelEl.textContent = 'Sin modelos';
+    showNotice('Abre la web desde un servidor local, no con doble clic: en VS Code, clic derecho en <code>index.html</code> → <em>Open with Live Server</em>.', () => loadModels());
+    say('No se pueden cargar los modelos abriendo el archivo directamente.');
+    return;
+  }
+  const draco = new DRACOLoader().setDecoderPath(CONFIG.dracoPath);
+  const loader = new GLTFLoader().setDRACOLoader(draco).setMeshoptDecoder(MeshoptDecoder);
+  const prog = { peluquero: [0, 0], cliente: [0, 0] };
+  const onP = (k) => (e) => {
+    prog[k] = [e.loaded, e.total || 0];
+    const tot = prog.peluquero[1] + prog.cliente[1];
+    if (tot > 0) labelEl.textContent = `Cargando ${Math.min(99, Math.round((prog.peluquero[0] + prog.cliente[0]) / tot * 100))} %`;
+  };
+  try {
+    const [gb, gc] = await Promise.all([
+      loadGLB(loader, CONFIG.modelos.peluquero.url, onP('peluquero')),
+      loadGLB(loader, CONFIG.modelos.cliente.url, onP('cliente'))
+    ]);
+    W.barber.clear(); W.client.clear();
+    [W.barber, W.client].forEach((r) => { r.position.set(0, 0, 0); r.rotation.set(0, 0, 0); r.scale.set(1, 1, 1); });
+    normalizeCharacter(gb, CONFIG.modelos.peluquero, W.barber);
+    const holder = normalizeCharacter(gc, CONFIG.modelos.cliente, W.client);
+    analyzeClient(W.client, CONFIG.modelos.cliente.altura);
+    W.rig = { barber: findRig(W.barber), client: findRig(W.client) };
+    W.client.add(W.clientFX);
+    holder.traverse((o) => { if (o.isMesh) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => m && patchDye(m)); });
+    if (!W.fx) buildFX();
+    W.allFX.forEach((o) => { o.visible = true; });     // compila todos los shaders antes del primer clic
+    DYE.uDyeOn.value = 1;
+    await renderer.compileAsync(scene, camera);
+    W.ready = true;
+    applyScene('base', 0);
+    render();
+    S.playback = 'ready'; S.locked = false; S.scene = 'base';
+    controller.classList.remove('loading');
+    labelEl.textContent = READY_LABEL;
+    setControls('all');
+    say('Barbería lista. Elige un servicio: corte, barba, lavado, tinte o completo.');
+  } catch (err) {
+    console.error(err);
+    S.playback = 'error';
+    labelEl.textContent = 'Sin modelos';
+    const missing = /404|Not Found/i.test(String(err && (err.message || err)));
+    showNotice(missing
+      ? 'Faltan los modelos 3D. Guarda <code>peluquero.glb</code> y <code>cliente.glb</code> en la carpeta <code>modelos/</code> junto a esta página.'
+      : 'No se han podido cargar los modelos 3D. Comprueba tu conexión e inténtalo de nuevo.', () => loadModels());
+    say('Error al cargar los modelos 3D.');
+  }
+}
+function startHero() {
+  try { initGL(); }
+  catch (err) {
+    console.error(err);
+    S.playback = 'error';
+    labelEl.textContent = 'Sin 3D';
+    showNotice('Tu navegador no puede mostrar gráficos 3D (WebGL). Prueba con Chrome, Edge, Firefox o Safari actualizados.', null);
+    return;
+  }
+  setDyeTarget(CONFIG.colorTinte);
+  new ResizeObserver(resize).observe(stage);
+  resize();
+  capTo(0);
+  setCam(baseCam(layout())); applyLights(LIGHTS.base, LIGHTS.base, 0); render();
+  loadModels();
+}
+
+/* ═════════════════════════════════════════════════════════════
+   6. SERVICIOS
+   ═════════════════════════════════════════════════════════════ */
+const ICONOS = {
+  corte: '<path d="M6 6.5a2.5 2.5 0 1 0 0 .01M6 17.5a2.5 2.5 0 1 0 0 .01M8.2 7.8 20 18M8.2 16.2 20 6"/>',
+  barba: '<path d="M3 10h11l5-4h2l-3 6h-15z"/><path d="M5 14c1 4 4 6 7 6s6-2 7-6"/>',
+  lavado: '<path d="M12 3s6 6.4 6 10.5A6 6 0 0 1 6 13.5C6 9.4 12 3 12 3Z"/><path d="M9.5 14.5a2.6 2.6 0 0 0 2.5 2.5"/>',
+  tinte: '<path d="M4 15h11a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Z"/><path d="M14 11 20 4M17 4h3v3"/>',
+  completo: '<path d="m12 3 2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8Z"/>'
+};
+function renderServices() {
+  const grid = $('#svc-grid');
+  grid.innerHTML = Object.entries(SERVICIOS).map(([k, s]) => `
+    <article class="panel svc" id="servicio-${k}">
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONOS[k]}</svg></div>
+      <h3 tabindex="-1">${s.nombre}</h3>
+      <p>${s.texto}</p>
+      <div class="svc-foot">
+        <div><span class="svc-price">${s.desde ? '<small>desde</small>' : ''}${s.precio} €</span><span class="svc-dur">${fmtDur(s.min)}</span></div>
+        <button class="btn" type="button" data-book="${k}" aria-label="Reservar ${s.nombre.toLowerCase()}">Reservar</button>
+      </div>
+    </article>`).join('');
+  grid.addEventListener('click', (e) => { const b = e.target.closest('[data-book]'); if (b) bookService(b.dataset.book); });
+}
+function goToService(key) {
+  const card = document.getElementById('servicio-' + key);
+  if (!card) return;
+  card.scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'center' });
+  card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+  setTimeout(() => card.classList.remove('flash'), 1800);
+  setTimeout(() => card.querySelector('h3').focus({ preventScroll: true }), mqReduce.matches ? 0 : 600);
+}
+
+/* ═════════════════════════════════════════════════════════════
+   7. RESEÑAS
+   ═════════════════════════════════════════════════════════════ */
+const STAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.6 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.5l-5.9 3.1 1.2-6.5L2.5 9.5l6.6-.9Z"/></svg>';
+function renderReviews() {
+  $('#rev-avg').textContent = RESENAS.media.toFixed(1).replace('.', ',');
+  $('#rev-stars').innerHTML = STAR.repeat(5);
+  $('#rev-count').textContent = `${RESENAS.total} reseñas en Google`;
+  $('#rev-all').href = NEGOCIO.fichaGoogle;
+  $('#rev-write').href = NEGOCIO.fichaGoogle;
+  $('#rev-q').textContent = `“${RESENAS.cita.texto}”`;
+  $('#rev-qa').textContent = `${RESENAS.cita.autor}, en Google`;
+  $('#rev-themes').innerHTML = RESENAS.temas.map(([t, n]) => `<li>${t} <b>${n}</b></li>`).join('');
+  $('#rev-people').innerHTML = RESENAS.personas.map(([n, f]) => `<li><span class="avatar" aria-hidden="true">${n[0]}</span><div><strong>${n}</strong><span class="stars" aria-label="5 estrellas">${STAR.repeat(5)}</span> <span>${f}</span></div></li>`).join('');
+}
+
+/* ═════════════════════════════════════════════════════════════
+   8. HORARIO (hora de Mérida, aunque el visitante esté en otra zona)
+   ═════════════════════════════════════════════════════════════ */
+const pad = (n) => String(n).padStart(2, '0');
+const toMin = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
+const fmtMin = (m) => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const ymdUTC = (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+const parseYmd = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d, 12)); };
+const addDays = (s, n) => { const d = parseYmd(s); d.setUTCDate(d.getUTCDate() + n); return ymdUTC(d); };
+const weekday = (s) => parseYmd(s).getUTCDay();
+function madridNow() {
+  const f = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const p = Object.fromEntries(f.formatToParts(new Date()).map((x) => [x.type, x.value]));
+  return { date: `${p.year}-${p.month}-${p.day}`, min: (+p.hour % 24) * 60 + +p.minute };
+}
+function renderHours() {
+  const now = madridNow(), today = weekday(now.date);
+  const order = [1, 2, 3, 4, 5, 6, 0];
+  $('#ct-hours').innerHTML = '<tbody>' + order.map((d) => {
+    const h = HORARIO[d];
+    const txt = h.length ? h.map(([a, b]) => `${a}–${b}`).join(' · ') : 'Cerrado';
+    return `<tr class="${d === today ? 'today' : ''}"><th scope="row">${DIAS[d][0].toUpperCase() + DIAS[d].slice(1)}</th><td>${txt}</td></tr>`;
+  }).join('') + '</tbody>';
+  const st = $('#ct-status');
+  const todays = HORARIO[today].map(([a, b]) => [toMin(a), toMin(b)]);
+  const open = todays.find(([a, b]) => now.min >= a && now.min < b);
+  st.classList.toggle('open', !!open);
+  if (open) { st.textContent = `Abierto ahora · cierra a las ${fmtMin(open[1])}`; return; }
+  const later = todays.find(([a]) => a > now.min);
+  if (later) { st.textContent = `Cerrado · abre hoy a las ${fmtMin(later[0])}`; return; }
+  for (let i = 1; i <= 7; i++) {
+    const d = (today + i) % 7;
+    if (HORARIO[d].length) { st.textContent = `Cerrado · abre ${i === 1 ? 'mañana' : 'el ' + DIAS[d]} a las ${HORARIO[d][0][0]}`; return; }
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════
+   9. RESERVAS
+   ═════════════════════════════════════════════════════════════ */
+const BK = { svc: 'corte', date: null, time: null, busy: {}, range: null, month: null, loading: false, error: null };
+const bk = {
+  main: $('#bk-main'), svcs: $('#bk-svcs'), dur: $('#bk-dur'), month: $('#bk-month'), prev: $('#bk-prev'), next: $('#bk-next'),
+  grid: $('#bk-grid'), legend: $('#bk-legend'), day: $('#bk-day'), slots: $('#bk-slots'), form: $('#bk-form'),
+  sum: $('#bk-sum'), msg: $('#bk-msg'), submit: $('#bk-submit'), demo: $('#bk-demo'), done: $('#bk-done')
+};
+const DEMO_KEY = 'amv-reservas-demo';
+function demoStore() { try { return JSON.parse(localStorage.getItem(DEMO_KEY) || '[]'); } catch (e) { return []; } }
+function demoSave(list) { try { localStorage.setItem(DEMO_KEY, JSON.stringify(list)); } catch (e) { /* almacenamiento no disponible */ } }
+// En modo demostración se simulan algunas citas ya ocupadas para que el calendario sea realista
+function demoBusy(from, to) {
+  const out = {};
+  for (let d = from; d <= to; d = addDays(d, 1)) {
+    const R = rng(+d.replace(/-/g, '')), list = [];
+    (HORARIO[weekday(d)] || []).forEach(([a, b]) => {
+      for (let t = toMin(a); t + 30 <= toMin(b); t += 30) if (R() < 0.32) list.push([t, t + 30]);
+    });
+    out[d] = list;
+  }
+  demoStore().forEach((r) => { (out[r.fecha] ||= []).push([toMin(r.hora), toMin(r.hora) + r.min]); });
+  return out;
+}
+async function loadAvailability() {
+  const now = madridNow();
+  const from = now.date, to = addDays(from, RESERVAS.dias - 1);
+  BK.range = { from, to };
+  BK.loading = true; BK.error = null; renderCalendar();
+  try {
+    if (!RESERVAS.url) BK.busy = demoBusy(from, to);
+    else {
+      const r = await fetch(`${RESERVAS.url}?accion=disponibilidad&desde=${from}&hasta=${to}`, { method: 'GET' });
+      const j = await r.json();
+      if (!j.ok) throw new Error(j.mensaje || 'error');
+      BK.busy = j.ocupado || {};
+    }
+  } catch (err) {
+    console.error(err);
+    BK.error = 'No hemos podido cargar la disponibilidad. Inténtalo de nuevo o llámanos al ' + NEGOCIO.telefono + '.';
+  }
+  BK.loading = false;
+  renderCalendar(); renderSlots(); renderSummary();
+}
+function freeSlots(date, dur) {
+  const ints = HORARIO[weekday(date)] || [];
+  const busy = BK.busy[date] || [];
+  const now = madridNow();
+  if (BK.range && (date < BK.range.from || date > BK.range.to)) return [];
+  const minStart = date === now.date ? now.min + RESERVAS.antelacion : -1;
+  const out = [];
+  ints.forEach(([a, b]) => {
+    const s0 = toMin(a), e0 = toMin(b);
+    for (let t = s0; t + dur <= e0; t += RESERVAS.paso) {
+      if (t < minStart) continue;
+      if (busy.some(([bs, be]) => t < be && t + dur > bs)) continue;
+      out.push(t);
+    }
+  });
+  return out;
+}
+function renderBookServices() {
+  bk.svcs.innerHTML = Object.entries(SERVICIOS).map(([k, s]) => `
+    <div class="bk-svc"><input type="radio" name="bk-svc" id="bk-s-${k}" value="${k}" ${k === BK.svc ? 'checked' : ''}>
+    <label for="bk-s-${k}"><strong>${s.nombre}</strong><span>${fmtDur(s.min)} · ${fmtPrecio(s)}</span></label></div>`).join('');
+  bk.svcs.addEventListener('change', (e) => { if (e.target.name === 'bk-svc') { BK.svc = e.target.value; onServiceChange(); } });
+}
+function onServiceChange() {
+  bk.dur.textContent = `· duración ${fmtDur(SERVICIOS[BK.svc].min)}`;
+  if (BK.time != null && !freeSlots(BK.date, SERVICIOS[BK.svc].min).includes(BK.time)) BK.time = null;
+  renderCalendar(); renderSlots(); renderSummary();
+}
+function bookService(key) {
+  BK.svc = key;
+  const r = document.getElementById('bk-s-' + key); if (r) r.checked = true;
+  onServiceChange();
+  showBookingForm();
+  document.getElementById('reservar').scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'start' });
+}
+function renderCalendar() {
+  if (!BK.range) return;
+  const now = madridNow();
+  if (!BK.month) BK.month = BK.range.from.slice(0, 7);
+  const [y, m] = BK.month.split('-').map(Number);
+  bk.month.textContent = `${MESES[m - 1]} ${y}`;
+  bk.prev.disabled = BK.month <= BK.range.from.slice(0, 7);
+  bk.next.disabled = BK.month >= BK.range.to.slice(0, 7);
+  const first = `${BK.month}-01`;
+  const lead = (weekday(first) + 6) % 7;
+  const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const dur = SERVICIOS[BK.svc].min;
+  let html = ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((d) => `<div class="cal-dow" aria-hidden="true">${d}</div>`).join('');
+  for (let i = 0; i < lead; i++) html += '<span class="day pad" aria-hidden="true"></span>';
+  let anyFree = false;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = `${BK.month}-${pad(d)}`;
+    const wd = weekday(date);
+    const inRange = date >= BK.range.from && date <= BK.range.to;
+    const closed = !(HORARIO[wd] || []).length;
+    const n = inRange && !closed && !BK.loading && !BK.error ? freeSlots(date, dur).length : 0;
+    if (n) anyFree = true;
+    const label = `${DIAS[wd]} ${d} de ${MESES[m - 1]}: ${!inRange ? 'no disponible' : closed ? 'cerrado' : BK.loading ? 'cargando' : n ? n + ' horas libres' : 'completo'}`;
+    const tag = !inRange || BK.loading ? '' : closed ? 'cerrado' : n ? `${n}<span class="w"> libres</span>` : 'completo';
+    html += `<button type="button" class="day${date === now.date ? ' today' : ''}" data-date="${date}" aria-pressed="${date === BK.date}" aria-label="${label}" ${n ? '' : 'disabled'}>${d}<small>${tag}</small></button>`;
+  }
+  bk.grid.innerHTML = html;
+  bk.legend.textContent = BK.loading ? 'Cargando disponibilidad…' : BK.error ? BK.error : anyFree ? `Reservas hasta el ${parseYmd(BK.range.to).getUTCDate()} de ${MESES[parseYmd(BK.range.to).getUTCMonth()]}. Domingos cerrado.` : 'No quedan horas libres este mes; prueba el siguiente.';
+}
+bk.grid.addEventListener('click', (e) => {
+  const b = e.target.closest('.day[data-date]'); if (!b || b.disabled) return;
+  BK.date = b.dataset.date; BK.time = null;
+  renderCalendar(); renderSlots(); renderSummary();
+  const again = bk.grid.querySelector(`[data-date="${BK.date}"]`); if (again) again.focus({ preventScroll: true });
+  const first = bk.slots.querySelector('.slot'); if (first && matchMedia('(max-width: 1000px)').matches) bk.slots.scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'nearest' });
+});
+bk.prev.addEventListener('click', () => { const [y, m] = BK.month.split('-').map(Number); const d = new Date(Date.UTC(y, m - 2, 1)); BK.month = `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}`; renderCalendar(); });
+bk.next.addEventListener('click', () => { const [y, m] = BK.month.split('-').map(Number); const d = new Date(Date.UTC(y, m, 1)); BK.month = `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}`; renderCalendar(); });
+function longDate(date) { const d = parseYmd(date); return `${DIAS[d.getUTCDay()]} ${d.getUTCDate()} de ${MESES[d.getUTCMonth()]}`; }
+function renderSlots() {
+  if (!BK.date) { bk.day.textContent = 'elige un día'; return; }
+  const dur = SERVICIOS[BK.svc].min;
+  const list = freeSlots(BK.date, dur);
+  bk.day.textContent = `· ${longDate(BK.date)}`;
+  if (!list.length) { bk.slots.innerHTML = '<p class="slots-empty">Ese día ya no quedan horas para este servicio. Prueba otro día.</p>'; return; }
+  const groups = [['Mañana', list.filter((t) => t < 15 * 60)], ['Tarde', list.filter((t) => t >= 15 * 60)]].filter((g) => g[1].length);
+  bk.slots.innerHTML = groups.map(([g, ts]) => `<div class="slot-group"><h5>${g}</h5><div class="slot-list">${ts.map((t) => `<button type="button" class="slot" data-t="${t}" aria-pressed="${t === BK.time}" aria-label="${fmtMin(t)} a ${fmtMin(t + dur)}">${fmtMin(t)}</button>`).join('')}</div></div>`).join('');
+}
+bk.slots.addEventListener('click', (e) => {
+  const b = e.target.closest('.slot'); if (!b) return;
+  BK.time = +b.dataset.t;
+  bk.slots.querySelectorAll('.slot').forEach((s) => s.setAttribute('aria-pressed', String(+s.dataset.t === BK.time)));
+  renderSummary();
+  if (matchMedia('(max-width: 1000px)').matches) $('#bk-name').scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'center' });
+});
+function renderSummary() {
+  const s = SERVICIOS[BK.svc];
+  const when = BK.date ? `${longDate(BK.date)}${BK.time != null ? ` a las ${fmtMin(BK.time)}` : ' · elige una hora'}` : 'elige día y hora';
+  bk.sum.innerHTML = `<strong>${s.nombre}</strong><span>${when}</span><span>${fmtDur(s.min)}</span><span class="price">${fmtPrecio(s)}</span>`;
+}
+const RX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function cleanPhone(v) { return v.replace(/[\s.\-()]/g, ''); }
+function validate() {
+  const f = bk.form, errs = {};
+  const name = f.nombre.value.trim(), email = f.email.value.trim(), tel = cleanPhone(f.telefono.value);
+  if (name.length < 2) errs.name = 'Escribe tu nombre.';
+  if (!RX_EMAIL.test(email)) errs.email = 'Revisa el correo electrónico.';
+  if (!/^(\+34|0034)?[6789]\d{8}$/.test(tel) && !/^\+\d{8,15}$/.test(tel)) errs.tel = 'Escribe un teléfono válido (9 cifras).';
+  [['name', '#bk-name'], ['email', '#bk-email'], ['tel', '#bk-tel']].forEach(([k, sel]) => {
+    const el = $(sel); el.setAttribute('aria-invalid', errs[k] ? 'true' : 'false'); $(sel + '-e').textContent = errs[k] || '';
+    if (errs[k]) el.setAttribute('aria-describedby', sel.slice(1) + '-e'); else el.removeAttribute('aria-describedby');
+  });
+  return { ok: !Object.keys(errs).length, name, email, tel, first: Object.keys(errs)[0] };
+}
+bk.form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  bk.msg.className = 'bk-msg'; bk.msg.textContent = '';
+  if (BK.date == null || BK.time == null) { bk.msg.className = 'bk-msg err'; bk.msg.textContent = 'Elige un día y una hora en el calendario.'; return; }
+  const v = validate();
+  if (!v.ok) { $({ name: '#bk-name', email: '#bk-email', tel: '#bk-tel' }[v.first]).focus(); return; }
+  if (!$('#bk-ok').checked) { bk.msg.className = 'bk-msg err'; bk.msg.textContent = 'Necesitamos que aceptes la política de privacidad.'; $('#bk-ok').focus(); return; }
+  const s = SERVICIOS[BK.svc];
+  const payload = { accion: 'reservar', servicio: BK.svc, fecha: BK.date, hora: fmtMin(BK.time), nombre: v.name, email: v.email, telefono: v.tel, web: bk.form.web.value };
+  bk.submit.disabled = true; bk.submit.textContent = 'Confirmando…';
+  try {
+    let res;
+    if (!RESERVAS.url) {
+      await new Promise((r) => setTimeout(r, 700));
+      const list = demoStore(); list.push({ ...payload, min: s.min, creada: new Date().toISOString() }); demoSave(list);
+      res = { ok: true, demo: true };
+    } else {
+      const r = await fetch(RESERVAS.url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+      res = await r.json();
+    }
+    if (res.ok) showDone(payload, res);
+    else if (res.codigo === 'ocupado') {
+      bk.msg.className = 'bk-msg err'; bk.msg.textContent = 'Esa hora se acaba de ocupar. Te mostramos las que siguen libres.';
+      BK.time = null; await loadAvailability();
+    } else { bk.msg.className = 'bk-msg err'; bk.msg.textContent = res.mensaje || 'No hemos podido guardar la reserva. Revisa los datos e inténtalo de nuevo.'; }
+  } catch (err) {
+    console.error(err);
+    bk.msg.className = 'bk-msg err'; bk.msg.textContent = `No hemos podido conectar con la agenda. Inténtalo de nuevo o llámanos al ${NEGOCIO.telefono}.`;
+  }
+  bk.submit.disabled = false; bk.submit.textContent = 'Confirmar reserva';
+});
+function gcalLink(p) {
+  const s = SERVICIOS[p.servicio], start = toMin(p.hora), end = start + s.min, d = p.fecha.replace(/-/g, '');
+  const t = (m) => `${d}T${pad(Math.floor(m / 60))}${pad(m % 60)}00`;
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: `${s.nombre} · ${NEGOCIO.nombre}`, dates: `${t(start)}/${t(end)}`, ctz: 'Europe/Madrid', location: NEGOCIO.direccion, details: `Cita en ${NEGOCIO.nombre}. Teléfono: ${NEGOCIO.telefono}` });
+  return 'https://calendar.google.com/calendar/render?' + q.toString();
+}
+function showDone(p, res) {
+  const s = SERVICIOS[p.servicio], first = p.nombre.split(/\s+/)[0];
+  $('#bk-done-h').textContent = `¡Reserva confirmada, ${first}!`;
+  $('#bk-done-p').textContent = `${s.nombre} el ${longDate(p.fecha)} a las ${p.hora} (${fmtDur(s.min)}, ${fmtPrecio(s)}). Te esperamos en ${NEGOCIO.direccion.split(',').slice(0, 2).join(',')}.`;
+  $('#bk-done-mail').textContent = res.demo ? 'Modo demostración: en la web real recibirías ahora un correo de confirmación.' : `Te hemos enviado un correo de confirmación a ${p.email}.`;
+  $('#bk-gcal').href = gcalLink(p);
+  bk.main.hidden = true; bk.done.hidden = false; bk.done.focus({ preventScroll: true });
+  document.getElementById('reservar').scrollIntoView({ behavior: mqReduce.matches ? 'auto' : 'smooth', block: 'start' });
+  BK.time = null; loadAvailability();
+}
+function showBookingForm() { bk.done.hidden = true; bk.main.hidden = false; }
+$('#bk-again').addEventListener('click', () => { showBookingForm(); bk.form.reset(); BK.date = null; BK.time = null; renderCalendar(); renderSlots(); renderSummary(); bk.slots.innerHTML = '<p class="slots-empty">Selecciona un día del calendario para ver las horas libres.</p>'; });
+function startBooking() {
+  bk.demo.hidden = !!RESERVAS.url;
+  renderBookServices();
+  onServiceChange();
+  loadAvailability();
+  setInterval(() => { renderHours(); if (!BK.loading) { renderCalendar(); if (BK.date) renderSlots(); } }, 5 * 60 * 1000);
+}
+
+/* ═════════════════════════════════════════════════════════════
+   10. MAPA REAL CON EL PASEO DEL CLIENTE (Leaflet + OpenStreetMap)
+   La barbería queda siempre en el centro: no se puede arrastrar y el zoom se hace sobre el centro.
+   ═════════════════════════════════════════════════════════════ */
+const LEAFLET = {
+  css: { href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', sri: 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=' },
+  js:  { src: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',  sri: 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' }
+};
+const WALK = { total: 4.6, appear: 0.25, walkEnd: 4.0 };     // segundos (≤ 5 s)
+let MAP = null;
+function loadLeaflet() {
+  if (window.L) return Promise.resolve(window.L);
+  return new Promise((resolve, reject) => {
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = LEAFLET.css.href; l.integrity = LEAFLET.css.sri; l.crossOrigin = ''; document.head.appendChild(l);
+    const s = document.createElement('script'); s.src = LEAFLET.js.src; s.integrity = LEAFLET.js.sri; s.crossOrigin = '';
+    s.onload = () => resolve(window.L); s.onerror = reject; document.head.appendChild(s);
+  });
+}
+function initMap(L) {
+  const el = $('#map');
+  const center = L.latLng(NEGOCIO.lat, NEGOCIO.lng);
+  const map = L.map(el, {
+    center, zoom: 17, zoomSnap: 0.25, zoomDelta: 0.5, dragging: false, scrollWheelZoom: false,
+    touchZoom: 'center', doubleClickZoom: 'center', boxZoom: false, keyboard: false, attributionControl: true, zoomControl: true
+  });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">colaboradores de OpenStreetMap</a>'
+  }).addTo(map);
+  const route = RUTA.map(([a, b]) => L.latLng(a, b));
+  const fitZoom = () => {
+    const size = map.getSize();
+    for (let z = 18.5; z >= 14; z -= 0.25) {
+      const c = map.project(center, z);
+      if (route.every((ll) => { const p = map.project(ll, z); return Math.abs(p.x - c.x) < size.x / 2 - 50 && Math.abs(p.y - c.y) < size.y / 2 - 80; })) return z;
+    }
+    return 14;
+  };
+  map.setView(center, fitZoom(), { animate: false });
+  new ResizeObserver(() => { map.invalidateSize({ animate: false }); map.setView(center, fitZoom(), { animate: false }); }).observe(el);
+  map.on('zoomend', () => { if (!map.getCenter().equals(center, 1e-7)) map.setView(center, map.getZoom(), { animate: false }); });
+
+  const trail = L.polyline([], { color: '#24508f', weight: 5, opacity: 0.75, dashArray: '2 10', lineCap: 'round' }).addTo(map);
+  const pinIcon = L.divIcon({ className: 'shop-pin', html: '<span class="pulse"></span><span class="badge"><svg viewBox="0 0 128 52" aria-hidden="true"><use href="#amv-logo"/></svg></span><span class="puff"></span>', iconSize: [58, 66], iconAnchor: [29, 66] });
+  const pin = L.marker(center, { icon: pinIcon, keyboard: false, title: NEGOCIO.nombre, zIndexOffset: 500 }).addTo(map);
+  pin.bindTooltip(`<strong>${NEGOCIO.nombre}</strong><br>${NEGOCIO.direccion}`, { direction: 'top', offset: [0, -66] });
+  const walkerIcon = L.divIcon({ className: 'walker hidden', html: '<div class="walker-in"><img src="img/cliente-lado.webp" alt="" width="26" height="88" onerror="this.onerror=null;this.src=\'img/cliente-lado.png\'"></div>', iconSize: [26, 88], iconAnchor: [13, 86] });
+  const walker = L.marker(route[0], { icon: walkerIcon, interactive: false, keyboard: false, zIndexOffset: 1000 }).addTo(map);
+
+  // longitudes acumuladas de la ruta (metros)
+  const cum = [0]; for (let i = 1; i < route.length; i++) cum.push(cum[i - 1] + route[i - 1].distanceTo(route[i]));
+  const total = cum[cum.length - 1];
+  const at = (dist) => {
+    let i = 1; while (i < cum.length - 1 && cum[i] < dist) i++;
+    const t = (dist - cum[i - 1]) / (cum[i] - cum[i - 1] || 1);
+    return { ll: L.latLng(lerp(route[i - 1].lat, route[i].lat, t), lerp(route[i - 1].lng, route[i].lng, t)), i };
+  };
+  MAP = { map, route, trail, walker, pin, at, total, cum, raf: 0, played: false };
+  const replay = $('#map-replay');
+  replay.hidden = false;
+  replay.addEventListener('click', () => playWalk());
+  if (mqReduce.matches) { trail.setLatLngs(route); replay.textContent = '▶ Ver el paseo'; }
+  else {
+    new IntersectionObserver((ents, obs) => { if (ents.some((e) => e.isIntersecting)) { obs.disconnect(); playWalk(); } }, { threshold: 0.55 }).observe(el);
+  }
+}
+function playWalk() {
+  const M = MAP; if (!M) return;
+  cancelAnimationFrame(M.raf);
+  const wEl = M.walker.getElement(), pinEl = M.pin.getElement(), puff = pinEl.querySelector('.puff');
+  wEl.classList.remove('gone', 'hidden', 'left'); wEl.classList.add('walking');
+  pinEl.classList.remove('bump');
+  M.trail.setLatLngs([M.route[0]]);
+  M.walker.setLatLng(M.route[0]);
+  const t0 = performance.now();
+  let last = -1, entered = false;
+  const step = (now) => {
+    const t = (now - t0) / 1000;
+    const wt = clamp01((t - WALK.appear) / (WALK.walkEnd - WALK.appear));
+    const dist = M.total * (wt < 0.5 ? 2 * wt * wt : 1 - Math.pow(-2 * wt + 2, 2) / 2) * 0.6 + M.total * wt * 0.4;
+    const { ll, i } = M.at(dist);
+    M.walker.setLatLng(ll);
+    if (i !== last) {
+      last = i;
+      const a = M.map.latLngToLayerPoint(M.route[i - 1]), b = M.map.latLngToLayerPoint(M.route[i]);
+      if (Math.abs(b.x - a.x) > 1) wEl.classList.toggle('left', b.x < a.x);
+    }
+    M.trail.setLatLngs([...M.route.slice(0, i), ll]);
+    wEl.style.opacity = String(clamp01(t / WALK.appear));
+    if (t >= WALK.walkEnd && !entered) {
+      entered = true;
+      wEl.classList.remove('walking'); wEl.classList.add('gone');
+      pinEl.classList.add('bump');
+      puff.innerHTML = Array.from({ length: 7 }, (_, k) => { const a = k / 7 * Math.PI * 2; return `<i style="--px:${Math.cos(a) * 26}px;--py:${Math.sin(a) * 18 - 10}px"></i>`; }).join('');
+      puff.classList.remove('go'); void puff.offsetWidth; puff.classList.add('go');
+    }
+    if (t < WALK.total) M.raf = requestAnimationFrame(step);
+    else { wEl.classList.add('hidden'); M.played = true; }
+  };
+  M.raf = requestAnimationFrame(step);
+}
+function startMap() {
+  const el = $('#map');
+  const go = () => loadLeaflet().then(initMap).catch((err) => {
+    console.error(err);
+    el.innerHTML = `<div class="map-fallback"><p>No se ha podido cargar el mapa.<br><a href="${NEGOCIO.comoLlegar}" target="_blank" rel="noopener">Abrir la ubicación en Google Maps</a></p></div>`;
+  });
+  new IntersectionObserver((ents, obs) => { if (ents.some((e) => e.isIntersecting)) { obs.disconnect(); go(); } }, { rootMargin: '600px 0px' }).observe(el);
+  $('#ct-route').href = NEGOCIO.comoLlegar;
+}
+
+/* ═════════════════════════════════════════════════════════════
+   11. ARRANQUE
+   ═════════════════════════════════════════════════════════════ */
+renderServices();
+renderReviews();
+renderHours();
+startBooking();
+startMap();
+startHero();
+
+window.__barberia = {
+  get state() { return { scene: S.scene, playback: S.playback, direction: S.direction, locked: S.locked, animating: !!S.anim }; },
+  anchors: A,
+  // Vista previa de un fotograma concreto: __barberia.preview('tinte', 0.5). __barberia.preview() lo deshace.
+  preview(key, p = 1) { if (!W.ready || S.anim) return; applyScene(key || S.scene, key ? p : committedP()); render(); },
+  playWalk: () => playWalk(),
+  get booking() { return { ...BK }; }
+};
+</script>
+</body>
+</html>
