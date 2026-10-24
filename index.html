@@ -103,7 +103,7 @@ img { max-width: 100%; }
 .hero { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
 .title {
   position: absolute;
-  top: 35.9%;
+  bottom: calc(53.22% + 46px);      /* siempre 46 px por encima de la barra de servicios */
   left: 50%;
   transform: translateX(-50%);
   width: min(901px, calc(100vw - 48px));
@@ -212,7 +212,7 @@ img { max-width: 100%; }
     border-radius 980ms var(--retake-slow-ease), opacity 400ms linear;
 }
 .track::after { opacity: 0.27; }
-.controller.collapsed .track { left: calc(50% - 96px); width: 192px; }
+.controller.collapsed .track { left: calc(50% - 146px); width: 292px; }
 .controller.rear-faded .track {
   opacity: 0;
   transition:
@@ -240,8 +240,8 @@ img { max-width: 100%; }
 }
 .capsule::after { opacity: 0.30; }
 .controller.collapsed .capsule {
-  left: calc(50% - 100px);
-  width: 200px;
+  left: calc(50% - 150px);
+  width: 300px;
   background-color: rgb(246 251 255 / 0.14);
   transition: left 980ms var(--retake-slow-ease), width 980ms var(--retake-slow-ease), background-color 980ms var(--retake-slow-ease), opacity 420ms var(--retake-ease);
 }
@@ -272,7 +272,7 @@ img { max-width: 100%; }
   transition: opacity 420ms var(--retake-ease), filter 420ms var(--retake-ease), transform 980ms var(--retake-slow-ease);
 }
 .label { transition: opacity 300ms var(--retake-ease), filter 420ms var(--retake-ease), transform 980ms var(--retake-slow-ease); font-variant-numeric: tabular-nums; }
-.controller.highlight .label { opacity: 0.5; }
+.controller.highlight .label { opacity: 0; }   /* la nube ocupa su sitio */
 button.cell {
   margin: 0;
   background: transparent;
@@ -297,35 +297,37 @@ button.cell:disabled { cursor: default; }
 .cell .t.reveal { animation: reveal 520ms var(--retake-ease) both; }
 @keyframes reveal { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
 
-/* ───── Nube de precio ───── */
+/* ───── Nube de precio: vive dentro de la barra (en la celda «Servicios» al pasar por los botones
+   y dentro de la cápsula junto a «Volver» al elegir un servicio), así nunca tapa a los personajes ───── */
 .cloud {
+  --cloud-w: 112px;
   position: absolute;
   left: var(--cloud-x, 50%);
-  bottom: calc(100% + 6px);
-  width: 150px;
-  height: 104px;
-  margin-left: -75px;
+  top: 36px;
+  width: var(--cloud-w);
+  height: 60px;
+  margin: -30px 0 0 calc(var(--cloud-w) / -2);
   pointer-events: none;
   opacity: 0;
-  transform: translateY(10px) scale(0.82);
-  transform-origin: 50% 100%;
-  transition: opacity 260ms var(--retake-ease), transform 420ms var(--retake-ease), left 520ms var(--retake-ease);
+  transform: scale(0.7);
+  transition: opacity 260ms var(--retake-ease), transform 420ms var(--retake-ease), left 620ms var(--retake-ease), top 620ms var(--retake-ease);
   z-index: 3;
 }
 .cloud.show { opacity: 1; transform: none; }
+.controller.collapsed .cloud { transition: opacity 260ms var(--retake-ease) 380ms, transform 420ms var(--retake-ease) 380ms, left 980ms var(--retake-slow-ease), top 980ms var(--retake-slow-ease); }
 .cloud-float { position: absolute; inset: 0; animation: float 3.4s ease-in-out infinite; }
-.cloud svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 10px 18px rgb(4 20 34 / 0.28)); }
+.cloud svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 4px 8px rgb(4 20 34 / 0.25)); }
 .cloud-txt {
   position: absolute;
-  left: 0; right: 0; top: 22px;
-  display: flex; flex-direction: column; align-items: center;
+  inset: 3px 0 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   color: var(--ink);
   text-shadow: none;
   line-height: 1;
 }
-.cloud-txt strong { font-size: 27px; font-weight: 700; letter-spacing: -0.04em; }
-.cloud-txt span { margin-top: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: #4a6577; }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.cloud-txt strong { font-size: 21px; font-weight: 700; letter-spacing: -0.04em; white-space: nowrap; }
+.cloud-txt span { margin-top: 2px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em; color: #4a6577; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
 
 /* ───── Header ───── */
 .top {
@@ -604,20 +606,24 @@ button.cell:disabled { cursor: default; }
 }
 .shop-pin.bump .badge { animation: bump 520ms var(--retake-ease); }
 @keyframes bump { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.18); } 100% { transform: translateX(-50%) scale(1); } }
+.start-pin .dot { position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%; background: #24508f; border: 2px solid #fff; box-shadow: 0 2px 6px rgb(0 0 0 / 0.3); }
+.start-pin .txt {
+  position: absolute; left: 0; top: -12px; transform: translate(-50%, -100%); white-space: nowrap;
+  padding: 3px 9px; border-radius: 999px; background: #24508f; color: #fff; font-size: 11px; font-weight: 700;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.25);
+}
 .walker { pointer-events: none; }
 .walker-in { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; transform-origin: 50% 100%; transition: opacity 360ms ease, transform 420ms var(--retake-ease); }
-.walker-in img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform-origin: 50% 100%; filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.35)); }
-.walker.left .walker-in img { scale: -1 1; }
-.walker.walking .walker-in img { animation: waddle 420ms ease-in-out infinite; }
+.walker-in .spr {
+  position: absolute; inset: 0; transform-origin: 50% 100%; filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.35));
+  background: url(img/cliente-paseo.png) 0 0 / 320px 88px no-repeat;      /* 8 fotogramas de 40 × 88 px */
+  background-image: image-set(url(img/cliente-paseo.webp) type('image/webp'), url(img/cliente-paseo.png) type('image/png'));
+}
+.walker.left .walker-in .spr { scale: -1 1; }
+.walker.walking .walker-in .spr { animation: walkcycle 640ms steps(8) infinite; }
 .walker.gone .walker-in { opacity: 0; transform: scale(0.2) translateY(-6px); }
 .walker.hidden { visibility: hidden; }
-@keyframes waddle {
-  0% { transform: rotate(-6deg) translateY(0); }
-  25% { transform: rotate(0deg) translateY(-3px); }
-  50% { transform: rotate(6deg) translateY(0); }
-  75% { transform: rotate(0deg) translateY(-3px); }
-  100% { transform: rotate(-6deg) translateY(0); }
-}
+@keyframes walkcycle { from { background-position: 0 0; } to { background-position: -320px 0; } }
 .puff { position: absolute; left: 50%; bottom: 20px; width: 0; height: 0; pointer-events: none; }
 .puff i { position: absolute; width: 14px; height: 14px; margin: -7px; border-radius: 50%; background: #fff; opacity: 0; box-shadow: 0 2px 6px rgb(0 0 0 / 0.2); }
 .puff.go i { animation: puff 620ms ease-out forwards; }
@@ -662,7 +668,7 @@ button.cell:disabled { cursor: default; }
   .cta { width: 104px; height: 34px; font-size: 13px; }
   .cta::after { content: ""; position: absolute; inset: -6px -10px; }
 
-  .title { top: 34%; width: calc(100vw - 40px); font-size: clamp(48px, 14vw, 64px); line-height: 0.88; white-space: normal; }
+  .title { bottom: calc(50% + 34px); width: calc(100vw - 40px); font-size: clamp(48px, 14vw, 64px); line-height: 0.88; white-space: normal; }
   .copy { top: 79%; width: calc(100vw - 44px); font-size: 14px; }
 
   .controller { top: 50%; width: calc(100vw - 40px); height: 210px; }
@@ -680,19 +686,19 @@ button.cell:disabled { cursor: default; }
   .capsule { opacity: 0; pointer-events: none; transition: opacity 420ms var(--retake-ease); }
   .controller.collapsed .capsule {
     opacity: 1; left: 50%; top: 4vh; top: 4dvh; transform: translate(-50%, -50%);
-    width: 196px; height: 64px; border-radius: 999px; background-color: rgb(246 251 255 / 0.18);
+    width: 272px; height: 64px; border-radius: 999px; background-color: rgb(246 251 255 / 0.18);
     transition: opacity 420ms var(--retake-ease);
   }
   .controller.expanding .capsule { transition: opacity 420ms var(--retake-ease); }
   .controller.cap-fade .capsule {
     left: 50%; top: 4vh; top: 4dvh; transform: translate(-50%, -50%);
-    width: 196px; height: 64px; border-radius: 999px; opacity: 0; background-color: rgb(246 251 255 / 0.18);
+    width: 272px; height: 64px; border-radius: 999px; opacity: 0; background-color: rgb(246 251 255 / 0.18);
   }
   .controller.collapsed .track {
-    left: calc(50% - 94px); width: 188px; top: calc(4vh - 28px); top: calc(4dvh - 28px); height: 56px; border-radius: 999px;
+    left: calc(50% - 132px); width: 264px; top: calc(4vh - 28px); top: calc(4dvh - 28px); height: 56px; border-radius: 999px;
   }
   .controller.collapsed button.cell.chosen { border-color: transparent; background: transparent; }
-  .cloud { bottom: auto; top: calc(4vh - 136px); top: calc(4dvh - 136px); }
+  .cloud { --cloud-w: 104px; top: 4vh; top: 4dvh; }
 
   .section { padding-left: 18px; padding-right: 18px; }
   .two { grid-template-columns: 1fr; }
@@ -707,21 +713,20 @@ button.cell:disabled { cursor: default; }
   .map-streets { left: 14px; right: auto; top: auto; bottom: 64px; max-width: calc(100% - 28px); }
 }
 @media (max-width: 700px) and (max-height: 700px) {
-  .title { top: 28.5%; font-size: clamp(40px, 12.5vw, 54px); }
+  .title { bottom: calc(52% + 26px); font-size: clamp(40px, 12.5vw, 54px); }
   .controller { top: 48%; height: 196px; }
   .track { height: 196px; }
   .cells { grid-template-rows: 44px 50px 50px 52px; }
   .copy { top: calc(48% + 206px); width: calc(100vw - 32px); font-size: 13px; }
 }
 @media (max-height: 520px) and (orientation: landscape) {
-  .title { top: 20%; font-size: clamp(34px, 8vh, 56px); }
-  .controller.collapsed .cloud { left: calc(50% + 182px); top: -20px; bottom: auto; }
+  .title { bottom: calc(50% + 28px); font-size: clamp(34px, 8vh, 56px); }
   .controller { top: 50%; }
   .copy { top: auto; bottom: 8px; font-size: 13px; }
   .copy .sub { display: none; }
 }
 @media (max-width: 700px) and (max-height: 520px) and (orientation: landscape) {
-  .title { top: 12%; font-size: clamp(28px, 7vh, 44px); white-space: nowrap; }
+  .title { bottom: calc(54% + 12px); font-size: clamp(28px, 7vh, 44px); white-space: nowrap; }
   .controller { top: 46%; height: 118px; }
   .track { height: 118px; }
   .cells { grid-template-columns: repeat(3, 1fr); grid-template-rows: 36px 41px 41px; }
@@ -731,7 +736,6 @@ button.cell:disabled { cursor: default; }
   button.cell[data-scene="tinte"] { border-left: 0; }
   .cell { font-size: 15px; }
   .copy { bottom: 6px; font-size: 12px; }
-  .cloud { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -740,7 +744,7 @@ button.cell:disabled { cursor: default; }
     transition-duration: 1ms !important;
     transition-delay: 0ms !important;
   }
-  .cell .t.reveal, .cloud-float, .walker.walking .walker-in img, .shop-pin.bump .badge { animation: none !important; }
+  .cell .t.reveal, .cloud-float, .walker.walking .walker-in .spr, .shop-pin.bump .badge { animation: none !important; }
   .controller.collapsed .cell:not(.chosen), .stage.title-hidden .title span, .copy.swap, .cell.leaving .t { filter: none; }
 }
 </style>
@@ -784,11 +788,10 @@ button.cell:disabled { cursor: default; }
     <div class="capsule glass" aria-hidden="true"></div>
     <div class="cloud" id="cloud" aria-hidden="true">
       <div class="cloud-float">
-        <svg viewBox="0 0 150 104">
+        <svg viewBox="0 0 112 60" preserveAspectRatio="none">
           <g fill="#fbfdff">
-            <circle cx="44" cy="46" r="26"/><circle cx="76" cy="34" r="32"/><circle cx="108" cy="47" r="25"/>
-            <circle cx="60" cy="60" r="22"/><circle cx="94" cy="60" r="21"/><rect x="30" y="48" width="92" height="30" rx="15"/>
-            <circle cx="76" cy="90" r="6.5"/><circle cx="78" cy="101" r="3.6"/>
+            <circle cx="30" cy="32" r="18"/><circle cx="54" cy="23" r="21"/><circle cx="80" cy="30" r="17"/>
+            <rect x="12" y="28" width="88" height="28" rx="14"/>
           </g>
         </svg>
         <div class="cloud-txt"><strong id="cloud-price">12 €</strong><span id="cloud-dur">30 min</span></div>
@@ -947,12 +950,12 @@ button.cell:disabled { cursor: default; }
     <div class="head">
       <p class="eyebrow">Contacto y horario</p>
       <h2 id="contacto-h">Ven a vernos</h2>
-      <p class="lead">Estamos en la calle San Salvador, en el centro de Mérida. Así se llega desde la calle de San Juan de Dios.</p>
+      <p class="lead">Estamos en la calle San Salvador, en el centro de Mérida, a unos 600 metros a pie de la Plaza de España. Así se llega desde allí.</p>
     </div>
     <div class="contact-grid">
       <div class="panel map-box">
         <div class="map" id="map" role="region" aria-label="Mapa con la ubicación de AMV Salón barbería"></div>
-        <div class="map-streets" aria-hidden="true">Ruta: <b>C. de San Juan de Dios</b> → <b>C. San Salvador</b></div>
+        <div class="map-streets" aria-hidden="true">Ruta: <b>Plaza de España</b> → <b>C. San Salvador</b></div>
         <button class="map-replay" type="button" id="map-replay" hidden>▶ Ver el paseo</button>
       </div>
       <div class="panel info">
@@ -1040,19 +1043,28 @@ const RESENAS = {
   personas: [['Andrés D.', 'may. 2026'], ['Jaime M.', 'jun. 2026'], ['Yeray M.', 'ago. 2026'], ['Laura P.', 'abr. 2026'], ['Chestsilver', 'ene. 2026'], ['Joaquín B.', 'dic. 2025'], ['Jorge M.', 'oct. 2025']]
 };
 
-// Paseo del mapa: C. de San Juan de Dios → C. San Salvador (coordenadas reales de OpenStreetMap)
+// Paseo del mapa: Plaza de España → C. San Salvador, unos 600 m a pie por calles reales
+// (ruta peatonal calculada sobre OpenStreetMap con BRouter)
 const RUTA = [
-  [38.917325, -6.3471635], [38.9172873, -6.3472822], [38.9172218, -6.3473888], [38.9170919, -6.3475846],
-  [38.9168466, -6.3480025],                                   // giro a C. San Salvador
-  [38.9172945, -6.3485012], [38.9175857, -6.34891],           // puerta
+  [38.916388, -6.343697],                                     // Plaza de España
+  [38.916357, -6.343835], [38.916343, -6.343882], [38.916319, -6.343988], [38.916195, -6.344334],
+  [38.916020, -6.344757], [38.915825, -6.345208], [38.915610, -6.345926], [38.915589, -6.345978],
+  [38.915627, -6.346017], [38.915857, -6.346257], [38.915989, -6.346321], [38.916003, -6.346328],
+  [38.916027, -6.346383], [38.916024, -6.346572], [38.915997, -6.346663], [38.915761, -6.347076],
+  [38.916200, -6.347439], [38.916233, -6.347476], [38.916252, -6.347494], [38.916515, -6.347743],
+  [38.916812, -6.347967],                                     // giro a C. San Salvador
+  [38.916847, -6.348002], [38.917295, -6.348501], [38.917585, -6.348911],   // puerta
   [38.9175549, -6.3489457]                                    // la barbería
 ];
 
 const CONFIG = {
   modelos: {
     // giroY en radianes: si un personaje sale de espaldas, pon Math.PI; de lado, ±Math.PI / 2.
-    peluquero: { url: 'modelos/peluquero.glb', altura: 1.78, giroY: 0 },
-    cliente:   { url: 'modelos/cliente.glb',   altura: 1.86, giroY: 0 }
+    peluquero: { url: 'modelos/peluquero.glb', altura: 1.8, giroY: 0 },
+    // cabeza: medidas de la cabeza y la barba del cliente en fracciones de su altura (pies = 0, coronilla = 1);
+    // las usan la cámara, la espuma, la navaja, las tijeras y el tinte. Sin ellas se calculan a partir de los vértices.
+    cliente:   { url: 'modelos/cliente.glb',   altura: 1.78, giroY: 0,
+      cabeza: { top: 1, hy: 0.847, r: 0.089, hx: 0, hz: -0.018, front: 0.084, beardFront: 0.11, beardTop: 0.8, beardBottom: 0.715, neck: 0.7 } }
   },
   colorTinte: '#b4532a',
   dracoPath: 'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/libs/draco/gltf/'
@@ -1115,15 +1127,18 @@ function capTo(i) {
 }
 const canHover = () => S.playback === 'ready' && S.scene === 'base' && !controller.classList.contains('collapsed');
 
-/* ───── Nube flotante con el precio ───── */
+/* ───── Nube con el precio (dentro de la barra) ───── */
+const CLOUD_DOCK = () => mqPhone.matches ? 74 : 88;        // centro de la nube respecto al centro de la cápsula
+const CHOSEN_SHIFT = () => mqPhone.matches ? 56 : 52;      // «Volver» se desplaza a la izquierda para dejarle sitio
 function showCloud(b, centered) {
   const s = SERVICIOS[b.dataset.scene];
   cloudPrice.textContent = fmtPrecio(s).replace('desde ', 'desde ');
-  cloudPrice.style.fontSize = s.desde ? '21px' : '';
+  cloudPrice.style.fontSize = s.desde ? '15px' : '';
   cloudDur.textContent = fmtDur(s.min);
+  // con un servicio elegido, a la derecha de «Volver» dentro de la cápsula; si no, en la celda «Servicios»
   let x;
-  if (centered) x = controller.clientWidth / 2;
-  else { const r = b.getBoundingClientRect(), c = controller.getBoundingClientRect(); x = r.left + r.width / 2 - c.left - (parseFloat(b.dataset.dx) || 0); }
+  if (centered) x = controller.clientWidth / 2 + CLOUD_DOCK();
+  else { const r = labelEl.getBoundingClientRect(), c = controller.getBoundingClientRect(); x = r.left + r.width / 2 - c.left; }
   controller.style.setProperty('--cloud-x', x + 'px');
   cloud.classList.add('show');
 }
@@ -1161,8 +1176,8 @@ function setControls(mode, hideOthers) {
 }
 function capsuleCenter() {
   const r = controller.getBoundingClientRect();
-  if (mqPhone.matches) return { x: r.left + r.width / 2, y: r.top + window.innerHeight * 0.04 };
-  return { x: r.left + r.width / 2, y: r.top - 1 + 36 };
+  if (mqPhone.matches) return { x: r.left + r.width / 2 - CHOSEN_SHIFT(), y: r.top + window.innerHeight * 0.04 };
+  return { x: r.left + r.width / 2 - CHOSEN_SHIFT(), y: r.top - 1 + 36 };
 }
 function placeChosen(b, instant) {
   const r = b.getBoundingClientRect();
@@ -1500,9 +1515,14 @@ function normalizeCharacter(gltf, cfg, root) {
   root.updateMatrixWorld(true);
   return holder;
 }
-// Mide la cabeza y la barba del cliente. Con los modelos de la carpeta modelos/ usa sus piezas con nombre
-// (cabeza_piel, cabeza_pelo, cabeza_barba); con cualquier otro modelo recorre sus vértices.
-function analyzeClient(root, H) {
+// Mide la cabeza y la barba del cliente: usa las medidas de CONFIG.modelos.cliente.cabeza si existen; si no,
+// las piezas con nombre (cabeza_piel, cabeza_pelo, cabeza_barba) o, en último caso, recorre sus vértices.
+function analyzeClient(root, H, medidas) {
+  if (medidas) {
+    A.H = H;
+    for (const k in medidas) A[k] = medidas[k] * H;
+    return;
+  }
   root.updateMatrixWorld(true);
   const inv = root.matrixWorld.clone().invert(), rel = new THREE.Matrix4();
   const boxOf = (re) => {
@@ -1815,11 +1835,11 @@ const SVC = {
         }
         const rest = easeIO(seg(p, 0.9, 1));
         if (p < 0.6) lift = (1 - seg(p, 0.5, 0.6)) * 0.3;
-        const pt = beardPt(lerp(xn, -1.0, rest), lerp(yn, 0.72, rest));
+        const pt = beardPt(lerp(xn, -1.05, rest), lerp(yn, 0.4, rest));
         // hoja apoyada en la barba (canto hacia abajo), mango saliendo hacia la cámara
         f.razor.position.set(pt.x - lift * 0.5 - 0.02, pt.y + 0.012, pt.z + 0.035 + lift);
         f.razor.rotation.set(0, -0.82, lerp(-0.35, 0.7, rest));
-        f.razor.scale.setScalar(1.5 * rIn);
+        f.razor.scale.setScalar(1.3 * rIn);
       }
       const tw = seg(p, 0.86, 1);
       if (tw > 0) f.sparks.slice(0, 5).forEach((m, i) => {
@@ -2116,7 +2136,7 @@ async function loadModels() {
     [W.barber, W.client].forEach((r) => { r.position.set(0, 0, 0); r.rotation.set(0, 0, 0); r.scale.set(1, 1, 1); });
     normalizeCharacter(gb, CONFIG.modelos.peluquero, W.barber);
     const holder = normalizeCharacter(gc, CONFIG.modelos.cliente, W.client);
-    analyzeClient(W.client, CONFIG.modelos.cliente.altura);
+    analyzeClient(W.client, CONFIG.modelos.cliente.altura, CONFIG.modelos.cliente.cabeza);
     W.rig = { barber: findRig(W.barber), client: findRig(W.client) };
     W.client.add(W.clientFX);
     holder.traverse((o) => { if (o.isMesh) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => m && patchDye(m)); });
@@ -2501,10 +2521,11 @@ function initMap(L) {
   map.on('zoomend', () => { if (!map.getCenter().equals(center, 1e-7)) map.setView(center, map.getZoom(), { animate: false }); });
 
   const trail = L.polyline([], { color: '#24508f', weight: 5, opacity: 0.75, dashArray: '2 10', lineCap: 'round' }).addTo(map);
+  L.marker(route[0], { icon: L.divIcon({ className: 'start-pin', html: '<span class="dot"></span><span class="txt">Plaza de España</span>', iconSize: [0, 0] }), interactive: false, keyboard: false, zIndexOffset: 400 }).addTo(map);
   const pinIcon = L.divIcon({ className: 'shop-pin', html: '<span class="pulse"></span><span class="badge"><svg viewBox="0 0 128 52" aria-hidden="true"><use href="#amv-logo"/></svg></span><span class="puff"></span>', iconSize: [58, 66], iconAnchor: [29, 66] });
   const pin = L.marker(center, { icon: pinIcon, keyboard: false, title: NEGOCIO.nombre, zIndexOffset: 500 }).addTo(map);
   pin.bindTooltip(`<strong>${NEGOCIO.nombre}</strong><br>${NEGOCIO.direccion}`, { direction: 'top', offset: [0, -66] });
-  const walkerIcon = L.divIcon({ className: 'walker hidden', html: '<div class="walker-in"><img src="img/cliente-lado.webp" alt="" width="26" height="88" onerror="this.onerror=null;this.src=\'img/cliente-lado.png\'"></div>', iconSize: [26, 88], iconAnchor: [13, 86] });
+  const walkerIcon = L.divIcon({ className: 'walker hidden', html: '<div class="walker-in"><span class="spr"></span></div>', iconSize: [40, 88], iconAnchor: [20, 86] });
   const walker = L.marker(route[0], { icon: walkerIcon, interactive: false, keyboard: false, zIndexOffset: 1000 }).addTo(map);
 
   // longitudes acumuladas de la ruta (metros)

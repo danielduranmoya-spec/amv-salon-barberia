@@ -1,18 +1,22 @@
 Personajes 3D de la web
 
-peluquero.glb y cliente.glb están hechos por código a partir de las láminas de referencia
-(fuente/personajes.js) y ya vienen comprimidos (meshopt + texturas webp), listos para la web.
+peluquero.glb (Cartoon Barber) y cliente.glb (Bearded Gentleman) son los modelos de Meshy, reducidos
+y con un esqueleto sencillo añadido para que la web pueda animarlos. Ya vienen comprimidos
+(meshopt + texturas webp), listos para la web.
 
-Cada modelo tiene articulaciones con nombre que la web anima: cabeza, brazo_izq, brazo_der,
-antebrazo_izq, antebrazo_der, pierna_izq y pierna_der. El cliente tiene además las piezas
-cabeza_pelo y cabeza_barba, que la web usa para colocar la espuma, la navaja y el tinte.
+Articulaciones con nombre que anima la web: cuerpo, cabeza, brazo_izq, brazo_der, antebrazo_izq,
+antebrazo_der, pierna_izq y pierna_der.
 
-Para cambiarlos:
-1. Edita fuente/personajes.js (colores, formas, peinado...).
-2. Abre fuente/generar.html con Live Server, revisa el resultado y pulsa los botones de descarga.
-3. Comprime los archivos descargados y guárdalos aquí, en la terminal de VS Code:
-   npx @gltf-transform/cli optimize peluquero.glb modelos/peluquero.glb --compress meshopt --texture-compress webp --texture-size 512 --simplify false --join false --flatten false --instance false --palette false
-   npx @gltf-transform/cli optimize cliente.glb modelos/cliente.glb --compress meshopt --texture-compress webp --texture-size 512 --simplify false --join false --flatten false --instance false --palette false
+Para regenerarlos desde los GLB originales de Meshy (en la terminal de VS Code, dentro de esta carpeta):
 
-Si en algún momento usas otros modelos (de Meshy, por ejemplo), la web también funciona:
-sin articulaciones los personajes se mueven enteros y la cabeza del cliente se mide por sus vértices.
+1. Reducir la malla y las texturas:
+   npx @gltf-transform/cli weld original.glb tmp1.glb
+   npx @gltf-transform/cli simplify tmp1.glb tmp2.glb --ratio 0.07 --error 0.0005     (0.45 para el peluquero)
+   npx @gltf-transform/cli resize tmp2.glb tmp3.glb --width 1024 --height 1024
+
+2. Añadir el esqueleto (necesita: npm i @gltf-transform/core @gltf-transform/extensions):
+   node fuente/rig.mjs tmp3.glb tmp4.glb cliente        (o peluquero)
+   Las posiciones de hombros, codos, muñecas, caderas y cuello de cada personaje están en fuente/rigs.json.
+
+3. Comprimir:
+   npx @gltf-transform/cli optimize tmp4.glb cliente.glb --compress meshopt --texture-compress webp --texture-size 1024 --simplify false --join false --flatten false --instance false --palette false --weld false

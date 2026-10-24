@@ -6,18 +6,19 @@ Web de una sola página para AMV Salón barbería (C. San Salvador, 35, Mérida)
 amv-salon-barberia/
 ├── index.html          ← toda la web (HTML + CSS + JS)
 ├── privacidad.html     ← plantilla de política de privacidad (completa los campos amarillos)
-├── img/cliente-lado.*  ← el cliente de perfil, para el paseo del mapa
+├── img/cliente-paseo.* ← el cliente caminando de perfil (8 fotogramas), para el paseo del mapa
 ├── modelos/            ← aquí van peluquero.glb y cliente.glb
 └── apps-script/Code.gs ← el «servidor» de reservas (Google Calendar + correo)
 ```
 
 ## 1. Modelos 3D
 
-Los dos personajes ya están incluidos: `modelos/peluquero.glb` (≈ 0,5 MB) y `modelos/cliente.glb` (≈ 0,65 MB). Están modelados por código a partir de las láminas de referencia, en estilo dibujo animado de los años 30 con contorno de tinta, y comprimidos para que carguen rápido en el móvil.
+Los dos personajes son los modelos de Meshy: `modelos/peluquero.glb` (Cartoon Barber, ≈ 0,5 MB) y `modelos/cliente.glb` (Bearded Gentleman, ≈ 0,6 MB). Los originales pesaban 7 y 26 MB; se han reducido para que carguen rápido en el móvil (≈ 50 000 triángulos cada uno, texturas WebP de 1024 px y compresión meshopt).
 
-- Tienen articulaciones (cabeza, brazos, antebrazos y piernas): al cambiar de servicio los dos caminan dando pasos, y el peluquero levanta el brazo y marca el ritmo de cada servicio (tijeretazos en el corte, brochazos en la barba y el tinte, frotado en el lavado).
-- El tinte recolorea el pelo, la barba, el bigote y las cejas del cliente.
-- Para cambiar colores o formas, sigue `modelos/LEEME.txt` (la fuente está en `modelos/fuente/`).
+- Meshy los entrega sin esqueleto, así que se les ha añadido uno sencillo (cuerpo, cabeza, brazos, antebrazos y piernas) con `modelos/fuente/rig.mjs`. Con él los dos caminan dando pasos al cambiar de servicio y el peluquero levanta los brazos y marca el ritmo de cada servicio.
+- El tinte recolorea el pelo, la barba y el bigote castaños del cliente.
+- La cámara, las tijeras, la espuma, la navaja y el tinte se colocan con las medidas de la cabeza y la barba del cliente que hay en `CONFIG.modelos.cliente.cabeza` (fracciones de su altura). Si cambias de modelo, ajústalas o bórralas para que se calculen solas.
+- Para volver a generar los archivos a partir de los GLB de Meshy, sigue `modelos/LEEME.txt`.
 - Si un día pones otros modelos y salen de espaldas o de lado, cambia `giroY` en `CONFIG.modelos` dentro de `index.html` (`Math.PI` = media vuelta).
 
 ## 2. Probarla en tu ordenador
